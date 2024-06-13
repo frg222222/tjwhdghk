@@ -1,0 +1,609 @@
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <title>Morocco</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rozha+One&display=swap">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+  @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+
+/* Custom CSS styles */
+html {
+    font-size: 16px; /* 글자 크기를 18px에서 16px로 줄임 */
+    font-family: 'Pretendard', sans-serif; /* 폰트 적용 */
+    overflow-x: hidden; /* 가로 스크롤 방지 */
+}
+
+body {
+    margin: 0; /* 기본 여백 제거 */
+    padding: 0;
+    overflow-x: hidden; /* 가로 스크롤 방지 */
+}
+
+@media only screen and (max-width: 1000px) {
+    html {
+        font-size: 14px; /* 글자 크기를 16px에서 14px로 줄임 */
+    }
+}
+
+@media only screen and (max-width: 680px) {
+    html {
+        font-size: 12px; /* 글자 크기를 14px에서 12px로 줄임 */
+    }
+}
+
+
+
+.header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 4.44rem;
+    padding: 0 11%;
+    box-shadow: 0 2px 6px 0 rgba(231, 219, 219, 0.05);
+    font-weight: bold;
+    font-size: .77rem;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 2rem;
+}
+
+.header .logo {
+    margin-right: auto;
+    color: rgb(0, 0, 0);
+    font-family: 'Pretendard', sans-serif;
+    font-size: 1.5rem;
+}
+
+.header li {
+    display: inline;
+    padding-right: 2.22rem;
+}
+
+.header li a {
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    font-family: 'Pretendard', sans-serif;
+}
+
+@media only screen and (max-width: 550px) {
+    .header {
+        flex-direction: column;
+    }
+
+    .header .logo {
+        margin-right: 0;
+    }
+}
+
+/* Banner */
+.banner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50rem;
+    background: url("imgs/32.png") center center no-repeat;
+    background-size: 28%;
+    width: 100%;
+    box-sizing: border-box;
+    transform: translateX(4%); /* 이미지를 오른쪽으로 10% 이동 */
+}
+
+.banner h2 {
+    padding: .55rem 0;
+    border-top: 4px solid;
+    border-bottom: 4px solid;
+    font-size: 1.44rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+}
+
+.banner h1 {
+    margin-top: 50px;
+    font-size: 11rem;
+    font-weight: 900;
+    margin-left: -12rem; /* 원하는 간격으로 조정 */
+}
+
+.banner h1 span.space {
+    display: inline-block;
+    width: 16rem; /* 원하는 간격으로 조정 */
+}
+
+@media only screen and (max-width: 750px) {
+    .banner {
+        height: 40rem;
+    }
+
+    .banner h1 {
+        font-size: 8rem;
+        margin-left: -8rem;
+    }
+
+    .banner h1 span.space {
+        width: 8rem;
+    }
+}
+
+@media only screen and (max-width: 530px) {
+    .banner {
+        height: 30rem;
+    }
+
+    .banner h1 {
+        font-size: 6rem;
+        margin-left: -6rem;
+    }
+
+    .banner h1 span.space {
+        width: 4rem;
+    }
+}
+
+/* Journal */
+.journal {
+    padding: 0 10% 4rem 10%;
+    background-color: rgb(255, 255, 255);
+    box-sizing: border-box;
+}
+
+.photo {
+    width: 100%;
+    max-width: 750px;
+    padding: 1.11rem;
+    border-radius: 5px;
+    margin: 0 auto 4.44rem auto;
+    background-color: white;
+}
+
+.photo .image-container {
+    overflow: hidden;
+    margin-bottom: 1.11rem;
+}
+
+.photo .image-container img {
+    width: 100%;
+}
+
+.photo .caption {
+    font-style: italic;
+    color: black; /* 캡션 글씨를 검정색으로 변경 */
+}
+
+.photo.first {
+    position: relative;
+    top: -2.77rem;
+    margin-bottom: 1.67rem;
+}
+
+.journal p {
+    padding-bottom: 2.77rem;
+    font-size: 1.3rem; /* 글자 크기를 1.5rem에서 1.4rem로 줄임 */
+    line-height: 1.4;
+}
+
+.journal .first-letter {
+    float: left;
+    padding-right: 1.4rem;
+    font-size: 7.44rem;
+    line-height: 0.87;
+}
+
+.quote {
+    display: block;
+    padding: 4.44rem 0;
+    margin-bottom: 3.33rem;
+    border-top: 4px solid;
+    border-bottom: 4px solid;
+    text-align: center;
+    line-height: 1.2;
+    font-size: 3.55rem;
+    font-weight: 800;
+}
+
+.emphasized {
+    font-size: 1.6rem; /* 글자 크기를 1.8rem에서 1.6rem로 줄임 */
+    font-weight: bold;
+    color: #000000; /* 강조할 색상 */
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    border: 2px solid #000000;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+}
+
+.emphasized span {
+    position: relative;
+}
+
+.emphasized span::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px; /* 밑줄의 두께 */
+    background-color: red; /* 밑줄의 색상 */
+    bottom: -2px; /* 텍스트의 밑 부분에 위치 */
+    left: 0;
+    transform: scaleX(0);
+    transform-origin: bottom right;
+    transition: transform 0.3s ease-out;
+}
+
+.emphasized span:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+@media only screen and (max-width: 680px) {
+    .journal {
+        padding: 0 5% 4rem 5%;
+    }
+
+    .emphasized {
+        font-size: 1.4rem; /* 글자 크기를 1.5rem에서 1.4rem로 줄임 */
+        padding: 0.5rem;
+    }
+}
+
+.footer {
+    padding: 15px 0;
+    font-family: 'Pretendard', sans-serif;
+    text-align: center;
+    color: #000000;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 2rem;
+}
+
+.footer .row {
+    margin: 0.5% 0;
+    padding: 0.3% 0;
+    font-size: 0.9em;
+}
+
+.footer .row a {
+    text-decoration: none;
+    color: #000000;
+    transition: color 0.3s;
+    font-family: 'Pretendard', sans-serif;
+}
+
+.footer .row a:hover {
+    color: #FFA726;
+}
+
+.footer .row ul {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    box-sizing: border-box;
+}
+
+.footer .row ul li {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.footer .social-icons {
+    margin: 10px 0;
+}
+
+.footer .social-icons a {
+    font-size: 1.2em;
+    margin: 0 10px;
+    color: #F2F2F2;
+    transition: color 0.3s;
+}
+
+.footer .social-icons a:hover {
+    color: #FFA726;
+}
+
+.footer .contact-info {
+    margin: 10px 0;
+    font-size: 0.9em;
+}
+
+@media (max-width: 720px) {
+    .footer {
+        text-align: center;
+        padding: 5%;
+    }
+
+    .footer .row ul li {
+        display: block;
+        margin: 10px 0;
+        text-align: center;
+    }
+
+    .footer .social-icons a {
+        margin: 0 5%;
+    }
+}
+
+/* Scrolling Text */
+.roller {
+    height: 40vh;
+    width: 100vw;
+    color: rgb(255, 255, 255);
+    font-family: 'Helvetica', sans-serif;
+    font-weight: 500;
+    padding: 1em;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+}
+.roller p {
+    font-size: 3rem; /* 글자 크기 조정 */
+}
+
+.roller__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    height: 2.5em; /* li 요소의 높이 */
+    font-size: 3rem; /* 글자 크기 조정 */
+}
+
+.roller__list li:nth-child(odd) {
+    color: red; /* 홀수 항목을 빨간색으로 설정 */
+}
+
+.roller__list li:nth-child(even) {
+    color: blue; /* 짝수 항목을 파란색으로 설정 */
+}
+
+.roller__list li {
+    padding: .125em 0;
+    animation: roll 10s ease-in-out infinite;
+}
+
+@keyframes roll {
+    0% { transform: translateY(100%); }
+    10% { transform: translateY(0); }
+    25% { transform: translateY(0); }
+    35% { transform: translateY(-100%); }
+    50% { transform: translateY(-100%); }
+    60% { transform: translateY(-200%); }
+    75% { transform: translateY(-200%); }
+    85% { transform: translateY(-300%); }
+    100% { transform: translateY(-300%); }
+}
+.side-by-side {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* 이미지 사이의 간격을 20px로 설정 */
+}
+
+.side-by-side img {
+    width: 100%;
+    max-width: 45%;
+    border-radius: 10px;
+}
+
+/* Black background class */
+.black-background {
+    background-color: black;
+    color: white; /* 글자 색상을 흰색으로 변경 */
+    padding: 1rem; /* 가독성을 위해 약간의 여백 추가 */
+    border-radius: 5px; /* 둥근 모서리 추가 (선택 사항) */
+}
+
+/* New class for smaller image */
+.small-photo {
+    max-width: 28%;
+    padding: 0.55rem; /* 흰색 배경 테두리와 함께 크기를 줄임 */
+    border-radius: 5px;
+    margin: 0.5rem; /* 각 사진 간격 조절 */
+}
+.photo-grid {
+    display: flex; /* Flexbox 레이아웃 사용 */
+    justify-content: space-between; /* 각 사진을 동일한 간격으로 배치 */
+    align-items: center; /* 수직 가운데 정렬 */
+}
+    </style>
+    </head>
+    <body>
+    <!-- Header -->
+    <nav class="header">
+        <a href="6.html" class="logo">Ancient Korea</a>
+        <ul>
+            <li><a href="01.html">Introduction</a></li>
+            <li><a href="05.html">Photo</a></li>
+            <li><a href="04.html">Great</a></li>
+            <li><a href="02.html">Newspaper</a></li>
+            <li><a href="03.html">Goods</a></li>
+        </ul>
+    </nav>
+
+    <!-- Banner -->
+    <br><br><br><div class="banner">
+        <h1><span>Kor</span><span class="space"></span><span>ea</span></h1>
+    </div>
+
+    <!-- Scrolling News -->
+    <br><br><br><br>
+
+    <!-- Journal -->
+    <div class="journal">
+        <div class="first photo">
+            <div class="image-container">
+                <br><br><br><br><br><br><br><br><br>
+                <h2 style="font-size: 3rem;"><span style="color: red;">대한</span><span style="color: blue;">민국</span> ?</h2>
+                <img src="imgs/231.jpg" alt="A convoy of camels criss-crossing the crests of the Sahara">
+            </div>
+            <span class="caption">A convoy of camels criss-crossing the crests of the Sahara</span>
+            <!-- 강조된 텍스트 추가 -->
+            <br><br><br>
+            <p class="emphasized">
+                <span>대한민국은</span> <span>자유민주주의</span> <span>체제로서</span> <span>자유주의와</span> <span>민주주의가</span> <span>결합한</span> <span>모습을</span> <span>드러내며,</span> <span>대통령</span> <span>중심의</span> <span>다당제</span> <span>체제로서의</span> <span>특징이</span> <span>존재한다.</span> <span>3.1</span> <span>운동을</span> <span>계기로</span> <span>1919년</span> <span>4월</span> <span>11일</span> <span>선포된</span> <span>대한민국</span> <span>임시정부의</span> <span>법통을</span> <span>계승하여</span> <span>1948년</span> <span>8월</span> <span>15일</span> <span>자본주의와</span> <span>자유민주주의를</span> <span>기반으로</span> <span>하는</span> <span>대한민국</span> <span>정부가</span> <span>수립되었다.</span>
+            </p>
+        </div>
+        <h1 style="font-size: 1.8rem;">대한민국 이름 유래?</h1>
+        <p>
+            <span class="first-letter">!</span> 대한민국(大韓民國)이란 국호 중 ‘한’ 또는 ‘대한’(大韓)의 어원은 삼국시대 때 유래하였다. 고구려, 백제, 신라를 통틀어서 삼한이라 칭했는데, 그 삼한이 통일되었다는 의미에서 대한이라 한다. 삼국 시대 사람들은 한반도의 세 나라를 삼한이라 불렀고, 이것이 후대에 이어져서 삼한을 ‘삼국’이라 부르고 삼한일통의 하나의 '한(韓)'으로 자리잡았다. 즉 ‘한(韓)’의 나라라는 뜻이다.
+        </p>
+        <hr style="border: none; height: 5px; background-color: black; margin: 20px 0;">
+        <br><h1 style="font-size: 3rem; text-align: center;">대한민국 지형?</h1><br>
+        <div style="text-align: center;">
+            <img src="imgs/sa.png" alt="지형 사진 1" style="max-width: 30%; display: inline-block; margin-right: 20px;">
+            <img src="imgs/aaq.png" alt="지형 사진 2" style="max-width: 39.5%; display: inline-block;">
+        </div>
+        <h1 style="font-size: 1.8rem;">한반도?</h1>
+        <p>
+            <span class="first-letter">.</span>한반도는 동아시아에 위치한 반도로, 북쪽으로는 중국과 러시아, 남쪽으로는 동해와 서해로 둘러싸여 있습니다. <br>현재 한반도는 남북으로 분단되어 있으며, 남쪽에는 대한민국, 북쪽에는 조선민주주의인민공화국(북한)이 있습니다.
+        </p>
+        <br><h1 style="font-size: 1.8rem;">대한민국.</h1>
+        <p>
+            한반도는 동아시아에 위치한 반도로, 북쪽으로는 중국과 러시아와 접해 있으며, 남쪽으로는 동해와 서해에 면해 있습니다.<br> 총 면적은 약 22만 km²에 달하며, 다양한 지리적, 문화적 특징을 가지고 있습니다.
+        </p>
+
+    <br><br><br> <h1 style="font-size: 3rem; display: inline-block; vertical-align: middle;">태극기(太極旗)</h1>
+    <img src="imgs/qq.gif" alt="The long and winding road to Merrakec" style="width:100px; height:auto; display: inline-block; vertical-align: middle;">
+    
+    <p>
+        태극기는 흰색 바탕에 가운데 있는 태극 문양과 사방 대각선상에 검은색 선형의 네 괘로 구성된다.<br> 조선 말인 1897년 대한제국이 선포되면서부터 국기로 사용되었다.
+    </p>
+
+    <p style="font-family: 'serif'; font-style: italic; font-size: 1.1rem; font-weight: bold;">
+        "흰 바탕 중앙에 태극도를 그리고 그 주위에 팔괘를 두른다면 조선 8도의 수와 합치되고 있다."
+        <br><br>"8괘의 색깔은 완전 흑색으로 하여 드러나게 하고, 태극의 색깔은 반홍반흑으로 하며,<br> 깃발 가장자리에는 홍색선을 두른다면 어떻겠는가."
+        1882년 4월 11일 당시 마건충과 김홍집이 나눈 필담 내용 중
+    </p>
+    
+    
+    
+
+        <div class="journal">
+            <div class="side-by-side">
+            <img src="imgs/44.jpg" alt="Image 1">
+            <img src="imgs/55.jpg" alt="Image 2">
+            </div>
+        <br> 
+        </div>
+        <p>
+            "태극기는 해방 60년 동안 좌파와 우파, 진보와 보수, 10대와 노년층, 군부독재와 민주화세력 등 계급과 계층을 초월하여 한국현대사를 <br>가로지르는 다양한 이념의 수사로 사용돼오면서 태극기는 하나인데 태극기를 통해 표상하고자하는 바는 서로 달랐다"
+        </p>
+        
+        <span class="quote">"離合集散(이합집산)"</span><br>
+        <h1 style="font-size: 3rem;">한국 , 언어 ?</h1>
+
+        <h2>훈민 정음이란?</h2>
+        <p>
+            백성을 가르치는 바른 소리라는 뜻이다. '훈민정음'이라고 부르는 대상은 두 가지가 있는데, 그 하나는 1443년 음력 12월(양력 1444년 1월)에 <br>세종대왕이 만든 한국어의 표기 체계, 즉 오늘날의 한글을 창제 당시에 부른 이름이고, 또 하나는 1446년 9월에 발간된 책 이름이다.
+        </p>
+        <div class="journal">
+            <div class="side-by-side">
+            <img src="imgs/ooo.jpg" alt="Image 2">
+            <img src="imgs/qf.jpg" alt="Image 2">
+            </div>
+            <span class="caption">A stall at the Jemaa El Fnaa street market</span>
+        </div>
+
+
+        <h2>한글의 위대함?</h2>
+        <p>
+            현재 한글은 ㄱ ㄴ ㄷ ㄹ ㅁ ㅂ ㅅ ㅇ ㅈ ㅊ ㅋ ㅌ ㅍ ㅎ 14개의 닿소리(자음)와 ㅏ ㅑ ㅓ ㅕ ㅗ ㅛ ㅜ ㅠ ㅡ ㅣ 10개의 홀소리(모음)로 구성되어 있다. <br>한글은 24개의 자음과 모음을 결합하여 매우 많은 말소리를 기록할 수 있다는 점에서 과학적으로 뛰어난 문자로 평가받는다. 
+        </p>
+              
+        <p>
+           또한한글은 읽기와 쓰기가 매우 쉽습니다. 한글의 자모는 소리의 특징을 그대로 나타내기 때문에, 한글을 배우는 데 많은 시간이 걸리지 않습니다. <br>또 소리의 기본 단위인 음소를 나타내기 때문에, 한글을 읽고 쓰는 데 많은 노력이 필요하지 않습니다.
+        </p>
+        <div class="photo">
+            <div class="image-container">
+                <img src="imgs/113.jpg" alt="A stall at the Jemaa El Fnaa street market">
+            </div>
+          
+        </div>
+        <span class="quote">"剛木水生(강목수생)"</span><br>
+        <div class="black-background">
+            
+            <h1 style="font-size: 3rem; display: inline-block; vertical-align: middle;">남북 , 분단</h1>
+            <img src="imgs/qq.gif" alt="작은 이미지" style="width:50px; height:auto; display: inline-block; vertical-align: middle; margin-right: 10px;">
+            <img src="imgs/x1.gif" alt="다른 작은 이미지" style="width:70px; height:auto; display: inline-block; vertical-align: middle;">
+            <p>1948년, 한반도에 한국과 조선민주주의인민공화국(북한) 2개 정부가 수립됐다.<br> 한국과 북한은 유엔 에 동시 가입하는 등 국제법상 분단국이지만, 국내법적으로는<br> 하나의 나라라는 이중적 법체제가 이뤄져 있다.</p>
+            <div class="photo-grid">
+                <div class="photo small-photo">
+                    <div class="image-container">
+                        <img src="imgs/aa.jpg" alt="A stall at the Jemaa El Fnaa street market">
+                    </div>
+                    <span class="caption black-caption">남북 분단을 알리는 38도선 푯말 | 강원 양양</span> <!-- 검정색 글씨 스타일 적용 -->
+                </div>
+                <div class="photo small-photo">
+                    <div class="image-container">
+                        <img src="imgs/www.jpg" alt="Another stall at the market">
+                    </div>
+                    <span class="caption black-caption">38도선을 경계를 그리고 있는 미군</span> <!-- 검정색 글씨 스타일 적용 -->
+                </div>
+                <div class="photo small-photo">
+                    <div class="image-container">
+                        <img src="imgs/JJ.jpg" alt="Yet another stall at the market">
+                    </div>
+                    <span class="caption black-caption">현재 38도선을 지키고 있는 군인들</span> <!-- 검정색 글씨 스타일 적용 -->
+                </div>
+            </div>
+            <br<br><br><br><br><br><br> <div style="text-align: center; background-color: #515151; padding: 20px; border-radius: 10px;">
+                <h1 style="font-size: 2rem; color: #ffffff;">한반도 비무장 지대 (Korean Demilitarized Zone, DMZ)</h1>
+                <div style="text-align: center; margin: 20px 0;">
+                    <img src="imgs/000.jpg" alt="지형 사진 2" style="max-width: 48.5%; display: inline-block; border: 2px solid #ccc; border-radius: 10px;">
+                </div>
+                <p style="text-align: center; font-size: 1.2rem; color: #f3f3f3;">
+                    전쟁이나 분쟁 등으로 휴전 상태에 들어간 상호간의 협약에 의해 군사 활동이 금지된 지역을 말한다. 다른 말로는 중립 지대라고도 부른다. <br>대표적인 곳으로는 한반도의 DMZ와 남극 등이 있다. 유럽인들에게는 베르사유 조약으로 인해 비무장 지대가 됐던 라인란트가 유명하다.
+                </p>
+            </div>
+
+
+            <br><br><br><br><br> <h1 style="font-size: 2rem;">이산가족 상봉</h1><br><br>
+            
+                <div style="text-align: center;">
+                    <img src="imgs/777.jpg" alt="이산가족 상봉 사진 1" style="max-width: 40.8%; display: inline-block; margin-right: 10px;">
+                    <img src="imgs/888.png" alt="이산가족 상봉 사진 2" style="max-width: 45%; display: inline-block;">
+                </div>
+                <p style="text-align: center;">남북 이산가족 상봉(南北離散家族相逢)은 1945년의 남북분단과 1950년의 6.25 전쟁 이후 남한과 북한에서 따로 <br>떨어져 연락도 안되고 생사조차 알지 못하고 있던 가족 및 친지들이 서로 만나고 소식을 전할 수 있게 한 것을 말한다.</p>
+                <p style="text-align: center;">하지만 <span style="font-weight: bold; font-size: 2rem; color: rgb(255, 255, 255); text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">2020년</span> 이산가족이 고령화되면서 그 수가 줄어들고 있다. 1세대는 직접 헤어진 슬픔을 겪었지만,<br> 2세대는 이산가족 출신임을 인식해도 스스로를 이산가족으로 여기지 않는 경우가 많다.</p>
+                
+
+                
+           
+           
+            <div class="roller">
+                <p>KOREA&thinsp;</p>
+                <ul class="roller__list">
+                    <li>South Korea</li>
+                    <li>North Korea</li>
+                    <li>민주주의</li>
+                    <li>사회주의</li>
+                    <li>분단</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+   
+    <br><br><br><br><br><br>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="row">
+            <ul>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms of Service</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+        <div class="row">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+        <div class="row">
+            &copy; 2024 Museum of Culture. All rights reserved.
+        </div>
+    </footer>
+    </body>
+    </html>

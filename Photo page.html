@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+   * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            color: #0f0;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 4.44rem;
+            padding: 0 11%;
+            box-shadow: 0 2px 6px 0 rgba(231, 219, 219, 0.05);
+            font-weight: bold;
+            font-size: .77rem;
+            width: 100%;
+            box-sizing: border-box;
+            margin-bottom: 2rem;
+        }
+
+        .header .logo {
+            margin-right: auto;
+            color: rgb(0, 0, 0);
+            font-family: 'Pretendard', sans-serif;
+            font-size: 1.5rem;
+        }
+
+        .header li {
+            display: inline;
+            padding-right: 2.22rem;
+        }
+
+        .header li a {
+            text-decoration: none;
+            color: rgb(0, 0, 0);
+            font-family: 'Pretendard', sans-serif;
+        }
+
+        @media only screen and (max-width: 550px) {
+            .header {
+                flex-direction: column;
+            }
+
+            .header .logo {
+                margin-right: 0;
+            }
+        }
+
+        .footer {
+            padding: 15px 0;
+            font-family: 'Pretendard', sans-serif;
+            text-align: center;
+            color: #000000;
+            width: 100%;
+            box-sizing: border-box;
+            margin-top: 2rem;
+        }
+
+        .footer .row {
+            margin: 0.5% 0;
+            padding: 0.3% 0;
+            font-size: 0.9em;
+        }
+
+        .footer .row a {
+            text-decoration: none;
+            color: #000000;
+            transition: color 0.3s;
+            font-family: 'Pretendard', sans-serif;
+        }
+
+        .footer .row a:hover {
+            color: #FFA726;
+        }
+
+        .footer .row ul {
+            width: 100%;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            box-sizing: border-box;
+        }
+
+        .footer .row ul li {
+            display: inline-block;
+            margin: 0 10px;
+        }
+
+        .footer .social-icons {
+            margin: 10px 0;
+        }
+
+        .footer .social-icons a {
+            font-size: 1.2em;
+            margin: 0 10px;
+            color: #F2F2F2;
+            transition: color 0.3s;
+        }
+
+        .footer .social-icons a:hover {
+            color: #FFA726;
+        }
+
+        .footer .contact-info {
+            margin: 10px 0;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 720px) {
+            .footer {
+                text-align: center;
+                padding: 5%;
+            }
+
+            .footer .row ul li {
+                display: block;
+                margin: 10px 0;
+                text-align: center;
+            }
+
+            .footer .social-icons a {
+                margin: 0 5%;
+            }
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); /* 크기 줄이기 */
+            gap: 1rem; /* 간격 줄이기 */
+            justify-items: center;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .item {
+            position: relative;
+            height: 15rem; /* 높이 줄이기 */
+            background-color: lightGrey;
+            overflow-y: hidden;
+            box-shadow: 0.1rem 0.1rem 1rem rgba(0, 0, 0, 0.1);
+            border-radius: 2%;
+        }
+
+        .item a {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .item a:hover ~ .item-overlay,
+        .item a:focus ~ .item-overlay {
+            transform: translate3d(0, 0, 0);
+        }
+
+        .item a:hover ~ .item-overlay .item-body,
+        .item a:focus ~ .item-overlay .item-body {
+            opacity: 1;
+        }
+
+        .item img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+        }
+
+        .item-overlay {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+            position: absolute;
+            width: 100%;
+            top: 0;
+            transition: transform 300ms;
+            background-color: rgba(0, 0, 0, 0.85);
+            transform: translate3d(0, 100%, 0);
+        }
+
+        .item-body {
+            flex-grow: 1;
+            padding: 1rem; /* 패딩 조정 */
+            opacity: 0;
+            transition: opacity 500ms 100ms;
+            text-align: left; /* 좌측 정렬 */
+            color: #ffffff; /* 글자색 변경 */
+            font-size: 0.9rem; /* 글자 크기 조정 */
+            line-height: 1.4; /* 줄 간격 조정 */
+        }
+
+        .item-body p {
+            margin: 0;
+        }
+
+        .title {
+            position: relative;
+            font-size: 1.8rem; /* 글자 크기 확대 */
+            color: #333;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3); /* 텍스트 그림자 추가 */
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            width: 100%;
+            height: 5px;
+            background: #00ff91;
+            animation: slideIn 2s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            0% { width: 0; }
+            100% { width: 100%; }
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .section {
+            flex: 1;
+            max-width: 50%;
+            padding: 1rem;
+            box-sizing: border-box;
+        }
+
+        .section h3 {
+            font-size: 1.5rem;
+            color: #333;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .small-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .small-item {
+            position: relative;
+            width: 70%; /* 크기를 줄입니다. */
+            padding-top: 50%; /* 높이를 줄입니다. */
+            background-color: lightGrey;
+            overflow: hidden;
+            box-shadow: 0.1rem 0.1rem 1rem rgba(0, 0, 0, 0.1);
+            border-radius: 2%;
+        }
+
+        .move-right {
+            position: relative;
+            left: 30%; /* 오른쪽으로 이동할 거리 조정 */
+        }
+
+        .small-item a {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .small-item a:hover ~ .item-overlay,
+        .small-item a:focus ~ .item-overlay {
+            transform: translate3d(0, 0, 0);
+        }
+
+        .small-item a:hover ~ .item-overlay .item-body,
+        .small-item a:focus ~ .item-overlay .item-body {
+            opacity: 1;
+        }
+
+        .small-item img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .item-overlay {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+            position: absolute;
+            width: 100%;
+            top: 0;
+            transition: transform 300ms;
+            background-color: rgba(0, 0, 0, 0.85);
+            transform: translate3d(0, 100%, 0);
+        }
+
+        .item-body {
+            flex-grow: 1;
+            padding: 1rem;
+            opacity: 0;
+            transition: opacity 500ms 100ms;
+            text-align: left;
+            color: #ffffff;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .item-body p {
+            margin: 0;
+        }
+
+        .arrow {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 2rem 0;
+        }
+
+        .arrow i {
+            font-size: 4rem; /* 화살표 크기 조정 */
+            color: #333;
+        }
+
+        .arrow::before {
+            content: '';
+            width: 50%;
+            height: 2px;
+            background-color: #333;
+            margin-right: 1rem;
+        }
+
+        .arrow::after {
+            content: '';
+            width: 50%;
+            height: 2px;
+            background-color: #333;
+            margin-left: 1rem;
+        }
+
+        .full-image {
+            width: 100%;
+            height: auto;
+            max-height: 100vh;
+            object-fit: cover;
+            box-shadow: 0.1rem 0.1rem 1rem rgba(0, 0, 0, 0.1);
+        }
+
+        .full-section {
+            position: relative;
+       
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .full-section h1 {
+            position: absolute;
+            color: #00ff73;
+            font-size: 5rem;
+            z-index: 2;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .full-section::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* 어두운 오버레이 */
+            z-index: 1;
+        }
+
+        .slides {
+            display: flex;
+            width: 300%;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slide {
+            flex: 1 0 100%;
+            height: 100%;
+        }
+
+        .scroll-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2rem;
+            color: #fff;
+            background-color: rgba(0, 0, 0, 0.5);
+            border: none;
+            cursor: pointer;
+            z-index: 3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .scroll-button.left {
+            left: 10px;
+        }
+
+        .scroll-button.right {
+            right: 10px;
+        }
+
+        @media (max-width: 1024px) {
+            .item {
+                height: 12rem;
+            }
+
+            .section {
+                max-width: 100%;
+                padding: 0.5rem;
+            }
+
+            .arrow {
+                display: none;
+            }
+
+            .section h3 {
+                font-size: 1.2rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .small-item {
+                width: 80%;
+                padding-top: 60%;
+            }
+
+            .full-section h1 {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .item {
+                height: 10rem;
+            }
+
+            .small-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .small-item {
+                width: 90%;
+                padding-top: 70%;
+            }
+
+            .full-section h1 {
+                font-size: 2rem;
+            }
+
+            .scroll-button {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <nav class="header">
+        <a href="6.html" class="logo">Ancient Korea</a>
+        <ul>
+            <li><a href="01.html">Introduction</a></li>
+            <li><a href="05.html">Photo</a></li>
+            <li><a href="04.html">Great</a></li>
+            <li><a href="02.html">Newspaper</a></li>
+            <li><a href="03.html">Goods</a></li>
+        </ul>
+    </nav>
+
+    <h1 class="title">1900년 초반</h1><br>
+    <div class="grid">
+        <div class="item">
+            <a href="#"></a>
+            <img src="imgs/ffw.png" alt="heavens-official-blessing">
+            <div class="item-overlay">
+                <div class="item-body">
+                    <p>얼어붙은 한강에서 스케이트를 타고 있는 사람들의 모습이다. 사람들 뒤편으로 1900년 준공된 한강철교가 보인다. </p>
+                </div>
+            </div>
+        </div>
+        
+        
+        <div class="item">
+            <a href="#"></a>
+            <img src="imgs/dwd.png" alt="link-click">
+            <div class="item-overlay">
+                <div class="item-body">
+                    <p>일본인들이 부산 어시장에서 어획물을 늘여 놓고 기념 촬영한 모습이다. 1889년 부산수산회사는 부산 어시장을 최초로 설립하였다.</p>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <a href="#"></a>
+            <img src="imgs/sc.png" alt="link-click">
+            <div class="item-overlay">
+                <div class="item-body">
+                    <p>담배를 태우며 여유를 부리고있는 한 뱃사공의 모습. 뱃사공은 배를 부리는 일을 직업으로 하는 사람으로, 줄여서 사공(沙工)이라고도 한다.</p>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <a href="#"></a>
+            <img src="imgs/vv.png" alt="link-click">
+            <div class="item-overlay">
+                <div class="item-body">
+                    <p>1900년 초반 자동차 옆에 서이는 부유층 청년들.이 시기만 해도 자동차는 대중을 위한 것이 아닌, 부유층의 마차를 대체하는 '신개념' 운송수단 중 하나로 여겨질 뿐이었다.</p>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <a href="#"></a>
+            <img src="imgs/lll.png" alt="link-click">
+            <div class="item-overlay">
+                <div class="item-body">
+                    <p>1900년 초 광화문 앞에 놓인 해태.해태의 모티브는 중국 진나라(晉) 당시 월지국에서 조공한 사자이다. 특히 기린과 유사하다는 얘기를 토대로 묘사된 해태는 '양'의 형태를 따서 뿔이 두개로 묘사된다.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br><br><br><br><br><br><br> <h1 class="title">1940~50년 (6.25전쟁)</h1><br>
+    <div class="grid">
+        <div class="item">
+            <a href="#"></a>
+            <img src="imgs/sax.png" alt="heavens-official-blessing">
+            <div class="item-overlay">
+                <div class="item-body">
+                    <p>1950년 9월 15일 인천상륙작전 당시 적색 해안(Red Beach)에 상륙하는 미 해병대원들의 모습이다. </p>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <a href="#"></a>
+            <img src="imgs/QEQ.png" alt="link-click">
+            <div class="item-overlay">
+                <div class="item-body">
+                    <p>1950년 9월 15일 한국군 신병들이 훈련소에서 미국제 브라우닝 자동소총(BAR)의 발사법을 배우고 있는 모습이다.</p>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <a href="#"></a>
+            <img src="imgs/dw.png" alt="link-click">
+            <div class="item-overlay">
+                <div class="item-body">
+                    <p>1950년 9월 26일 유엔군의 서울 진입을 환영하는 시민들의 모습이다. 이날 정오에 한국군 해병대가 중앙청에 태극기를 게양했으나, 서울에서의 전투는 끝나지 않았다.</p>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <a href="#"></a>
+            <img src="imgs/xs.png" alt="link-click">
+            <div class="item-overlay">
+                <div class="item-body">
+                    <p>1950년 10월 19일 한강에 새로 건설된 철교를 처음으로 지나는 열차의 모습. 1950년 6월 28일 북한군의 진격을 막기 위해 한강철교가 폭파되었지만 100일 만에 재개통되었다.</p>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <a href="#"></a>
+            <img src="imgs/132.png" alt="link-click">
+            <div class="item-overlay">
+                <div class="item-body">
+                    <p>1951년 9월 28일 미 한 병사가 새로 보급된 군수물자 중 동계 전투복을 확인하는 모습이다. 미군 병사들은 한국의 극심한 기후변화, 특히 겨울의 강추위에 고통받았다. </p>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <a href="#"></a>
+            <img src="imgs/XSA.png" alt="link-click">
+            <div class="item-overlay">
+                <div class="item-body">
+                    <p>1950년 7월 7일에 촬영된 사진으로, 인민군의 남침을 피해 피난 가고 있는 피난민들의 모습이다. </p>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <a href="#"></a>
+            <img src="imgs/vvV.png" alt="link-click">
+            <div class="item-overlay">
+                <div class="item-body">
+                    <p>1950년 9월 18일 인천상륙작전이 성공한 후, 호주 공군 한 중위가 미 국방성에서 발행한 군사 전문 일간지 『스타스 앤 스트라이프스』를 읽고 있는 모습이다. </p>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <a href="#"></a>
+            <img src="imgs/SQQ.png" alt="link-click">
+            <div class="item-overlay">
+                <div class="item-body">
+                    <p>1950년 8월 22일 미 운전병이 안전면도기를 사용하여 면도하는 모습이다. 한국 어린이가 거울을 들고 면도를 돕고 있으며, 주변에서 여러 민간인이 이를 지켜보고 있다.</p>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <a href="#"></a>
+            <img src="imgs/QEQE.png" alt="link-click">
+            <div class="item-overlay">
+                <div class="item-body">
+                    <p>1950년 9월 15일 신병훈련소에서 박격포 전술 수업을 듣는 한국군 병사들의 모습이다. 1950년 8월 까지 약 8,300명의 한국군 신병이 보충되었다.</p>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <a href="#"></a>
+            <img src="imgs/SQD.png" alt="link-click">
+            <div class="item-overlay">
+                <div class="item-body">
+                    <p>1950년 10월 15일에 촬영된 사진으로, 미 제3보병사단 65연대의 병사 3명이 금촌 지역에서 지나가던 시민 2명의 신분을 확인하며 검문하고 있는 모습이다.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- New Content Starts Here -->
+    <br><br><br><br><br><br><br> 
+
+    <div class="container">
+        <div class="section">
+            <h3>1960~70년대</h3><br>
+            <div class="small-grid">
+                <div class="small-item move-right">
+                    <a href="#"></a>
+                    <img src="imgs/dqd.png" alt="1960-70-image1">
+                    <div class="item-overlay">
+                        <div class="item-body">
+                            <p>1960년대 말 광주대단지의 천막촌 모습이다. 광주대단지는 서울 도시 개발 과정에서 철거민이 된 주민들을 정착시키기 위해 조성된 주택단지였다.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="small-item">
+                    <a href="#"></a>
+                    <img src="imgs/dwq.png" alt="1960-70-image2">
+                    <div class="item-overlay">
+                        <div class="item-body">
+                            <p>1960년대 후반 서독에 파견된 한국 광부들이 휴식시간에 물과 음식을 먹고 있는 장면이다. 1966년 한국과 서독 사이에 맺어진 특별 고용계약으로 1966년부터 1977년까지 12년간 7,932명의 광부가 서독으로 파견되었다.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="small-item move-right">
+                    <a href="#"></a>
+                    <img src="imgs/ffff.png" alt="1960-70-image3">
+                    <div class="item-overlay">
+                        <div class="item-body">
+                            <p>1962년 1월 서울에서 촬영된 것으로 흑백 TV를 시청하고 있는 중산층 가정의 모습이다.1960년대 중반까지만 해도 TV 방송을 시청하는 가정은 거의 없었다.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="small-item">
+                    <a href="#"></a>
+                    <img src="imgs/ada.png" alt="1960-70-image4">
+                    <div class="item-overlay">
+                        <div class="item-body">
+                            <p>1975년 12월 12일 ‘퇴폐풍조’ 일제 단속 당시 경찰의 장발 단속에 적발된 청년 모습. 1970년대에는 일제시기 교육받은 기성세대와는 달리 한국전쟁 이후 성장하며 미국식 교육과 가치에 익숙한 청년세대가 등장하였다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="arrow">
+            <i class="fas fa-arrow-right"></i>
+        </div>
+        <div class="section">
+            <h3>1980~90년대</h3><br>
+            <div class="small-grid">
+                <div class="small-item move-right">
+                    <a href="#"></a>
+                    <img src="imgs/vs.jpg" alt="1980-90-image1">
+                    <div class="item-overlay">
+                        <div class="item-body">
+                            <p>1980~1990년대 대한민국 경제는 급속한 성장과 변화의 시기였습니다. 이 기간 동안 대한민국은 농업 중심의 경제에서 벗어나 산업화와 도시화를 통해 세계적인 경제 강국으로 성장했습니다.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="small-item">
+                    <a href="#"></a>
+                    <img src="imgs/bbb.png" alt="1980-90-image2">
+                    <div class="item-overlay">
+                        <div class="item-body">
+                            <p>1980년 5월 15일 서울역에서 대학생과 시민들이 시위를 벌이는 모습이다. 곳곳에 부정축재 환수, 계엄 해제 등을 요구하는 플래카드가 보인다. 이른바 ‘서울의 봄’</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="small-item move-right">
+                    <a href="#"></a>
+                    <img src="imgs/asd.png" alt="1980-90-image3">
+                    <div class="item-overlay">
+                        <div class="item-body">
+                            <p>5·18 광주민주화운동이 일어났던 1980년 5월 27일, 당시 계엄군의 전라남도청 진압작전으로 체포된 광주시민들의 모습, 5월 27일 자정부터 계엄군의 진압작전이 시작되었다.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="small-item">
+                    <a href="#"></a>
+                    <img src="imgs/iiii.png" alt="1980-90-image4">
+                    <div class="item-overlay">
+                        <div class="item-body">
+                            <p>1994년 서울. 1994년 설 연휴, 고향에 내려가기 위해 기차를 타려는 한 가족.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <!-- New Content Ends Here --> 
+     <br><br><br><br><br><br><br><br><div class="full-section">
+        <h1>Korea in the 2000s</h1>
+        <div class="slides slides-1">
+            <div class="slide">
+                <img src="imgs/sqm.jpg" alt="Full Image 1" class="full-image">
+            </div>
+            <div class="slide">
+                <img src="imgs/v1.jpg" alt="Full Image 2" class="full-image">
+            </div>
+            <div class="slide">
+                <img src="imgs/v2.jpg" alt="Full Image 3" class="full-image">
+            </div>
+            <div class="slide">
+                <img src="imgs/v4.jpg" alt="Full Image 4" class="full-image">
+            </div>
+        </div>
+
+        <button class="scroll-button left left-1"><i class="fas fa-arrow-left"></i></button>
+        <button class="scroll-button right right-1"><i class="fas fa-arrow-right"></i></button>
+    </div>
+    
+     <br><br><br><br><br><br><br><br><div class="full-section">
+        <h1>Korea in the 2020s</h1>
+        <div class="slides slides-2">
+            <div class="slide">
+                <img src="imgs/z1.jpg" alt="Full Image 1" class="full-image">
+            </div>
+            <div class="slide">
+                <img src="imgs/z2.jpg" alt="Full Image 2" class="full-image">
+            </div>
+            <div class="slide">
+                <img src="imgs/z3.jpg" alt="Full Image 3" class="full-image">
+            </div>
+            <div class="slide">
+                <img src="imgs/z4.jpg" alt="Full Image 4" class="full-image">
+            </div>
+            <div class="slide">
+                <img src="imgs/z5.jpg" alt="Full Image 4" class="full-image">
+            </div>
+        </div>
+
+        <button class="scroll-button left left-2"><i class="fas fa-arrow-left"></i></button>
+        <button class="scroll-button right right-2"><i class="fas fa-arrow-right"></i></button>
+    </div>
+
+    <footer class="footer">
+        <div class="row">
+            <ul>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms of Service</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+        <div class="row">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+        <div class="row">
+            &copy; 2024 Museum of Culture. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        const setupSlider = (slidesClass, nextBtnClass, prevBtnClass) => {
+            const slides = document.querySelector(slidesClass);
+            const slide = slides.querySelectorAll('.slide');
+            const nextBtn = document.querySelector(nextBtnClass);
+            const prevBtn = document.querySelector(prevBtnClass);
+            let currentIndex = 0;
+
+            nextBtn.addEventListener('click', () => {
+                if (currentIndex < slide.length - 1) {
+                    currentIndex++;
+                    updateSlidePosition();
+                }
+            });
+
+            prevBtn.addEventListener('click', () => {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                    updateSlidePosition();
+                }
+            });
+
+            function updateSlidePosition() {
+                slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+            }
+        };
+
+        // 첫 번째 슬라이더 설정
+        setupSlider('.slides-1', '.right-1', '.left-1');
+
+        // 두 번째 슬라이더 설정
+        setupSlider('.slides-2', '.right-2', '.left-2');
+    </script>
+</body>
+</html>

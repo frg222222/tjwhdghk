@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Newspaper Style Design Experiment</title>
+    <link href='https://fonts.googleapis.com/css?family=Playfair+Display:400,700,900,400italic,700italic|Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+      @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+
+body {
+    font-family: 'Droid Serif', serif;
+    font-size: 14px;
+    color: #2f2f2f;
+    background-color: #ffffff;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+    header {    
+        font-family: 'Pretendard', sans-serif; /* 폰트 적용 */
+        font-weight: 900;
+        font-size: 80px;
+        text-transform: uppercase;
+        display: inline-block;
+        line-height: 72px;
+        margin-bottom: 20px;
+    }
+    .new-header {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        height: 4.44rem;
+        padding: 0 12%;
+        box-shadow: 0 2px 6px 0 rgba(231, 219, 219, 0.05);
+        font-weight: bold;
+        font-size: .77rem;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    .header .logo {
+    margin-right: auto;
+    color: rgb(0, 0, 0);
+    font-family: 'Pretendard', sans-serif;
+    font-size: 1.5rem;
+}
+    .new-header li {
+        display: inline;
+        padding-right: 2.22rem;
+    }
+    .new-header li a {
+        text-decoration: none;
+        color: black;
+    }
+    @media only screen and (max-width: 550px) {
+        .new-header {
+            flex-direction: column;
+        }
+        .new-header .logo {
+            flex-grow: 0;
+        }
+    }
+p {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-family: 'Pretendard', sans-serif; /* 폰트 적용 */
+}
+.head {
+    text-align: center;
+    position: relative;
+}
+.subhead {
+    text-transform: uppercase;
+    border-bottom: 2px dashed #2f2f2f;
+    border-top: 2px dashed #2f2f2f;
+    padding: 12px 0 12px 0;
+}
+.weatherforcastbox {
+    position: relative;
+    width: 12%;
+    left: 10px;
+    border: 3px groove #2f2f2f;
+    padding: 10px 15px 10px 15px;
+    line-height: 20px;
+    display: inline-block;
+    margin: 0 50px 20px -360px;
+}
+.content-container {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+.content {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    width: 300%;
+    justify-content: center;
+    max-width: 1200px;
+}
+.collumn {
+    font-size: 14px;
+    line-height: 20px;
+    width: calc(100% / 3);
+    display: inline-block;
+    padding: 0 1%;
+    vertical-align: top;
+    margin-bottom: 50px;
+    transition: all .7s;
+}
+.collumn + .collumn {
+    border-left: 1px dotted #2f2f2f;
+}
+.collumn .headline {
+    text-align: center;
+    line-height: normal;
+    font-family: 'Pretendard', sans-serif; /* 폰트 적용 */
+    display: block;
+    margin: 0 auto;
+}
+.collumn .headline.hl1 {
+    font-weight: 700;
+    font-size: 30px;
+    text-transform: uppercase;
+    padding: 10px 0 10px 0;
+}
+.collumn .headline.hl2 {
+    font-weight: 400;
+    font-style: italic;
+    font-size: 24px;
+    box-sizing: border-box;
+    padding: 10px 0 10px 0;
+}
+.collumn .headline.hl2:before {
+    border-top: 1px dashed #2f2f2f;
+    content: '';
+    width: 100px;
+    height: 7px;
+    display: block;
+    margin: 0 auto;
+}
+.collumn .headline.hl2:after {
+    border-bottom: 1px dashed #2f2f2f;
+    content: '';
+    width: 100px;
+    height: 13px;
+    display: block;
+    margin: 0 auto;
+}
+.collumn .headline.hl3 {
+    font-weight: 400;
+    font-style: italic;
+    font-size: 36px;
+    box-sizing: border-box;
+    padding: 10px 0 10px 0;
+}
+.collumn .headline.hl4 {
+    font-weight: 700;
+    font-size: 12px;
+    box-sizing: border-box;
+    padding: 10px 0 10px 0;
+}
+.collumn .headline.hl4:before {
+    border-top: 1px dashed #2f2f2f;
+    content: '';
+    width: 100px;
+    height: 7px;
+    display: block;
+    margin: 0 auto;
+}
+.collumn .headline.hl4:after {
+    border-bottom: 1px dashed #2f2f2f;
+    content: '';
+    width: 100px;
+    height: 10px;
+    display: block;
+    margin: 0 auto;
+}
+.collumn .headline.hl5 {
+    font-weight: 400;
+    font-size: 42px;
+    text-transform: uppercase;
+    font-style: italic;
+    box-sizing: border-box;
+    padding: 10px 0 10px 0;
+}
+.collumn .headline.hl6 {
+    font-weight: 400;
+    font-size: 18px;
+    box-sizing: border-box;
+    padding: 10px 0 10px 0;
+}
+.collumn .headline.hl6:before {
+    border-top: 1px dashed #2f2f2f;
+    content: '';
+    width: 100px;
+    height: 7px;
+    display: block;
+    margin: 0 auto;
+}
+.collumn .headline.hl6:after {
+    border-bottom: 1px dashed #2f2f2f;
+    content: '';
+    width: 100px;
+    height: 10px;
+    display: block;
+    margin: 0 auto;
+}
+.collumn .headline.hl7 {
+    font-weight: 700;
+    font-size: 12px;
+    box-sizing: border-box;
+    display: block;
+    padding: 10px 0 10px 0;
+}
+.collumn .headline.hl8 {
+    font-weight: 700;
+    font-size: 12px;
+    box-sizing: border-box;
+    padding: 10px 0 10px 0;
+}
+.collumn .headline.hl9 {
+    font-weight: 700;
+    font-size: 12px;
+    box-sizing: border-box;
+    padding: 10px 0 10px 0;
+}
+.collumn .headline.hl10 {
+    font-weight: 700;
+    font-size: 12px;
+    box-sizing: border-box;
+    padding: 10px 0 10px 0;
+}
+.collumn .citation {
+    font-family: 'Pretendard', sans-serif; /* 폰트 적용 */
+    font-size: 36px;
+    line-height: 44px;
+    text-align: center;
+    font-weight: 400;
+    display: block;
+    margin: 40px 0 40px 0;
+    font-feature-settings: "liga", "dlig";
+}
+.collumn .citation:before {
+    border-top: 1px dashed #2f2f2f;
+    content: '';
+    width: 100px;
+    height: 16px;
+    display: block;
+    margin: 0 auto;
+}
+.collumn .citation:after {
+    border-bottom: 1px dashed #2f2f2f;
+    content: '';
+    width: 100px;
+    height: 16px;
+    display: block;
+    margin: 0 auto;
+}
+.collumn .figure {
+    margin: 0 0 20px;
+}
+.collumn .figcaption {
+    font-style: italic;
+    font-size: 12px;
+}
+.media {
+    -webkit-filter: sepia(80%) contrast(1) opacity(0.8);
+    filter: sepia(80%) grayscale(1) contrast(1) opacity(0.8);
+    mix-blend-mode: multiply;
+    width: 100%;
+}
+input[type="radio"] {
+    display: none;
+}
+.slide-buttons {
+    position: fixed;
+    top: 52%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+    z-index: 1000;
+}
+.slide-buttons label {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #2f2f2f;
+    margin: 0 5px;
+    cursor: pointer;
+    text-align: center;
+    line-height: 30px;
+    color: white;
+    font-size: 18px;
+}
+#slide1:checked ~ .content {
+    transform: translateX(0);
+}
+#slide3:checked ~ .content {
+    transform: translateX(-200%);
+}
+@media only all and (max-width: 1300px) {
+    .weatherforcastbox {
+        display: none;
+    }
+}
+@media only all and (max-width: 1200px) {
+    .collumn {
+        width: calc(100% / 3 / 3.23);
+    }
+}
+@media only all and (max-width: 900px) {
+    .collumn {
+        width: calc(100% / 3 / 2.13);
+    }
+}
+@media only all and (max-width: 600px) {
+    .collumn {
+        width: calc(100% / 3);
+    }
+    .collumn + .collumn {
+        border-left: none;
+        border-bottom: 1px dotted #2f2f2f;
+    }
+    header {
+        max-width: 320px;
+        font-size: 60px;
+        line-height: 54px;
+        overflow: hidden;
+    }
+}
+.footer {
+    background: #2f2f2f;
+    padding: 15px 0;
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    color: #F2F2F2;
+    width: 100%;
+    box-sizing: border-box;
+}
+.footer .row {
+    margin: 0.5% 0;
+    padding: 0.3% 0;
+    font-size: 0.9em;
+}
+.footer .row a {
+    text-decoration: none;
+    color: #F2F2F2;
+    transition: color 0.3s;
+}
+.footer .row a:hover {
+    color: #FFA726;
+}
+.footer .row ul {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    box-sizing: border-box;
+}
+.footer .row ul li {
+    display: inline-block;
+    margin: 0 10px;
+}
+.footer .social-icons {
+    margin: 10px 0;
+}
+.footer .social-icons a {
+    font-size: 1.2em;
+    margin: 0 10px;
+    color: #F2F2F2;
+    transition: color 0.3s;
+}
+.footer .social-icons a:hover {
+    color: #FFA726;
+}
+.footer .contact-info {
+    margin: 10px 0;
+    font-size: 0.9em;
+}
+@media (max-width: 720px) {
+    .footer {
+        text-align: center;
+        padding: 5%;
+    }
+    .footer .row ul li {
+        display: block;
+        margin: 10px 0;
+        text-align: center;
+    }
+    .footer .social-icons a {
+        margin: 0 5%;
+    }
+}
+
+.new {
+    font-size: 2.5em;
+    text-align: center;
+    clear: left;
+    text-transform: lowercase;
+    font-style: italic;
+    display: inline-block;
+    background: hsla(0,0%,0%, .0);
+    vertical-align: middle;
+    margin-right:400px;
+}
+
+.rectangle {
+    width: 100%;
+    height: 20px;
+    background-color: #2f2f2f;
+    margin-bottom: 20px;
+}
+.newspaper-teaser-fatline {
+    background-color: #2f2f2f;
+    color: #fff8ee;
+    font-size: 24px;
+    padding: 0.5em 1em;
+    margin: 0;
+    text-transform: uppercase;
+    width: 100%;
+    float: none;
+}
+
+/* 모달 스타일 */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 10px; /* 모달에 둥근 모서리 적용 */
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* :target 셀렉터 사용 */
+#modal:target {
+    display: block;
+}
+
+/* 모달 버튼 스타일 */
+.button {
+    display: inline-block;
+    padding: 5px 10px; /* 패딩을 줄임 */
+    font-size: 14px; /* 폰트 크기를 줄임 */
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #2f2f2f;
+    background-color: #fff8ee;
+    border: 2px solid #2f2f2f;
+    border-radius: 0;
+    margin: 2px; /* 마진을 줄임 */
+    transition: all 0.3s ease;
+    font-family: 'Playfair Display', serif;
+    text-transform: uppercase;
+}
+
+.button:hover {
+    background-color: #2f2f2f;
+    color: #fff8ee;
+}
+
+.button:active {
+    background-color: #2f2f2f;
+    color: #fff8ee;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+.breaking-news {
+    font-size: 24px;
+    font-weight: bold;
+    color: #000000;
+    text-align: center;
+    margin-bottom: 10px;
+}
+.highlight {
+    font-weight: bold;
+    color: rgb(0, 0, 0);
+    font-size: 22px;
+    display: inline-block; /* 추가된 속성 */
+}
+.move-right {
+    display: inline-block;
+    margin-left: 20px; /* 원하는 만큼 값을 조정하세요 */
+}
+.red-title {
+    color: rgb(0, 0, 0);
+    font-size: 24px;
+    text-align: center;
+    font-weight: bold;
+    font-family: 'Pretendard', sans-serif; /* 폰트 적용 */
+}
+.header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 4.44rem;
+    padding: 0 11%;
+    box-shadow: 0 2px 6px 0 rgba(231, 219, 219, 0.05);
+    font-weight: bold;
+    font-size: .77rem;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 2rem;
+}
+
+.header .logo {
+    margin-right: auto;
+    color: rgb(0, 0, 0);
+    font-family: 'Pretendard', sans-serif;
+    font-size: 1.5rem;
+}
+
+.header li {
+    display: inline;
+    padding-right: 2.22rem;
+}
+
+.header li a {
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    font-family: 'Pretendard', sans-serif;
+}
+
+@media only screen and (max-width: 550px) {
+    .header {
+        flex-direction: column;
+    }
+
+    .header .logo {
+        margin-right: 0;
+    }
+}
+
+@media (max-width: 1200px) {
+    .content {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .collumn {
+        width: 100%;
+        border-left: none;
+        border-bottom: 1px dotted #2f2f2f;
+        margin-bottom: 20px;
+    }
+
+    .collumn + .collumn {
+        border-bottom: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .header {
+        padding: 0 5%;
+    }
+
+    .collumn {
+        width: 100%;
+        padding: 0 5%;
+    }
+
+    .footer .row ul li {
+        display: block;
+        margin: 10px 0;
+        text-align: center;
+    }
+
+    .footer .social-icons a {
+        margin: 0 5%;
+    }
+}
+
+@media (max-width: 480px) {
+    .header .logo {
+        font-size: 1.2rem;
+    }
+
+    .header li {
+        padding-right: 1rem;
+    }
+
+    .collumn .headline.hl1 {
+        font-size: 24px;
+    }
+
+    .collumn .headline.hl3 {
+        font-size: 28px;
+    }
+
+    .collumn .headline.hl5 {
+        font-size: 32px;
+    }
+
+    .collumn .headline.hl6 {
+        font-size: 14px;
+    }
+}
+    </style>
+</head>
+<body>
+    <!-- Header -->
+  <nav class="header">
+    <a href="6.html" class="logo">Ancient Korea</a>
+    <ul>
+        <li><a href="01.html">Introduction</a></li>
+        <li><a href="05.html">Photo</a></li>
+        <li><a href="04.html">Great</a></li>
+        <li><a href="02.html">Newspaper</a></li>
+        <li><a href="03.html">Goods</a></li>
+    </ul>
+  </nav>
+    <div class="head">
+        <div class="rectangle"></div>
+        <p class="newspaper-teaser-fatline">Aurors Out of Control?</p>
+        <br><br>
+       <br> <span class="new"><span>N e w</span></span>
+        <div class="headerobjectswrapper">
+            <header>서울 신문</header>
+        </div>
+        <br><br>
+    <div class="content-container">
+        <input type="radio" name="slider" id="slide1" checked>
+        <input type="radio" name="slider" id="slide3">
+        
+        <div class="slide-buttons">
+        </div>
+        <div class="content">
+            <div class="collumn">
+                <div class="head"><span class="headline hl3">1970 south korea</span></div>
+                <hr style="border: none; border-top: 5px solid #2f2f2f; margin: 10px 0;"> <!-- 윗선 추가 -->
+                <br><p class="red-title">경제성장</p>
+
+                <figure class="figure">
+                    <br><img class="media" src="imgs/CC.png" alt="작은 사진 설명">
+                </figure>
+                <p>70년대 서울 도심에서는 재개발 사업이 본격화돼 소공동에 플라자호텔(1978년 완공),롯데호텔(1979년 완공)같은 대형 건축물이 하나둘씩 건설되면서 현대도시로서의 면모를 갖추기 시작했습니다</p>
+               <br>  <p class="red-title">나훈아 남진</p>
+                <p>전남 목포 출신인 남진은 부산 출신인 나훈아와 각각 영호남을 대표하며 1970년대 가요계에서 라이벌 구도를 형성했다. 라이벌 가수 남진과 나훈아는 우리 가요계 트로트 가수의 대표이자 화려한 뉴스 메이커로 많은 사람들의 호기심을 자극했다.</p>
+                <figure class="figure">
+                    <img class="media" src="imgs/ttt.jpg" alt="Description of the image">
+                </figure>
+            </div>
+            <div class="collumn">
+                <div class="head"><span class="headline hl5">1980 south korea</span></div>
+                <hr style="border: none; border-top: 5px solid #2f2f2f; margin: 10px 0;"> <!-- 윗선 추가 -->
+                <br><p class="red-title">긴급 속보</p>
+
+                <br>1979년 10월 26일 박대통령이 피살된후 최규하 국무총리가 통일주체국민회의 대의원회에서 제 10대 대통령으로 당선되었다.
+                <figure class="figure">
+                   <br> <img class="media" src="imgs/ad.png" alt="추가된 사진 설명">
+                </figure>
+                <br> <p class="red-title">12.12 군사반란</p>
+                <p>그러나 최대통령이 등장한 지 6일만인 12월 12일 국군보안사령관 전두환 소장, 9사단장 노태우 소장, 그리고 보안사령부 장교들이 중심이 되어 쿠데타가 일어났다. </p>
+                <figure class="figure">
+                    <img class="media" src="imgs/vz.jpg" alt="추가된 작은 사진 설명">
+                </figure>
+            </div>
+            <div class="collumn">
+                <div class="head"><span class="headline hl1">1990 south korea</span></div>
+                <hr style="border: none; border-top: 5px solid #2f2f2f; margin: 10px 0;"> <!-- 윗선 추가 -->
+                <br><p class="red-title">IMF 외한 위기</p>
+
+                <p><br>1997년 11월 21일,대한민국이 IMF에 구제금융을 신청하게 되었습니다.사실 상 국가 부도 상황이 되었습니다.당시 달러 환율이 2,000원까지 올랐습니다. 그리고 금리도 연 30%에 다다랐습니다.</p>
+                <figure class="figure">
+                    <img class="media" src="imgs/xa.png" alt="추가된 작은 사진 설명">
+                </figure>
+                <br><p class="red-title">수학 능력시험 시행</p>
+                <p>한국에서 (수시・특별 전형을 제외한) 정시 전형으로 대학교에 입학하기 위해서는. 흔히 ‘수능’이라 불리는 대학수학능력시험을 보아야 한다. 매년 11월 실시되는 수능은 1993년 처음으로 실시되었다.</p>
+                <figure class="figure">
+                    <img class="media" src="imgs/ss.jpg" alt="추가된 작은 사진 설명">
+                </figure>
+            </div>
+            <div class="collumn">
+                <div class="head"><span class="headline hl3">2000 south korea</span></div>
+                <hr style="border: none; border-top: 5px solid #2f2f2f; margin: 10px 0;"> <!-- 윗선 추가 -->
+                <br><p class="red-title">2002 월드컵</p>
+                
+                <p>2002년 한국과 일본에서 공동으로 제17회 FIFA 월드컵을 개최하였다. 2002 월드컵은 역사상 최초로 아시아에서 열리는 월드컵이었고, 또한 한국 역사상 4강이라는 최고의 성적을 기록했던 월드컵 행사이기도 하였다.</p>
+                <figure class="figure">
+                    <img class="media" src="imgs/hh.jpg" alt="추가된 작은 사진 설명">
+                </figure>
+                <br><p class="red-title">K-pop의 태동기</p>
+                <p> 2000년대 후반에는 소녀시대, 투애니원, 브라운 아이드 걸스, 2PM, 티아라, 미쓰에이, 카라 등 댄스음악 중심의 아이돌 그룹들이 인기를 누렸다.</p>
+                <p> 동남아시아, 중국, 일본 등 해외시장으로 활발히 진출하는 그룹들이 많아지면서, 다국적 멤버로 아이돌 그룹을 구성하는 경우도 늘기 시작했다.</p>
+                <figure class="figure">
+                    <img class="media" src="imgs/vv.jpg" alt="추가된 작은 사진 설명">
+                </figure>   
+                <br><br>   
+            </div>
+            <div class="collumn">
+                <div class="head"><span class="headline hl1">2010 south korea</span></div>
+                <hr style="border: none; border-top: 5px solid #2f2f2f; margin: 10px 0;"> <!-- 윗선 추가 -->
+                <br><p class="red-title">세월호 참사</p>
+
+                <p>2016년 4월 16일 인천에서 출발하여 제주도로 향하던 한 여객선이 남해바다에서 침몰하는 일이 발생하였다. 학생, 교사, 신혼부부, 가족 등 476명이 탑승한 여객선에서 생존자는 172명뿐이었다. 나머지 304명은 사망하거나 실종되었다.</p>
+                <figure class="figure">
+                    <img class="media" src="imgs/ii.jpg" alt="추가된 작은 사진 설명">
+                </figure>   
+                <br><p class="red-title">2018 평창 올림픽</p>
+                <p>2018년 2월 한국 평창, 강릉, 정선 일대에서 제23회 동계올림픽이 열렸다. 이는 1988년 서울 하계올림픽에 이어 대한민국에서 개최한 두 번째 올림픽이고, 쇼트트랙 스피드 스케이팅, 피겨스케이팅, 봅슬레이, 컬링 등 15종목의 경기가 열렸고 92개국에서 약 2,925명의 인원이 참가하였다.</p>
+
+                <figure class="figure">
+                    <img class="media" src="imgs/787.jpg" alt="추가된 작은 사진 설명">
+                </figure>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 모달 -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <a href="#" class="close">&times;</a>
+            <p>모달 창 내용입니다.</p>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="row">
+            <ul>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms of Service</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+        <div class="row">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+        <div class="row">
+            &copy; 2024 Museum of Culture. All rights reserved.
+        </div>
+    </footer>
+</body>
+</html>

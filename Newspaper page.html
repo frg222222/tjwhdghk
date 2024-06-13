@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Madison Square Market</title>
+  <!-- pretendard 폰트 불러오기 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* 기존 CSS 유지 */
+    html, body {
+      margin: 0;
+      padding: 0;
+      /* 폰트 변경 */
+      font-family: 'Pretendard', sans-serif;
+      overflow-x: hidden;
+    }
+    .container {
+      max-width: 1024px;
+      margin: 0 auto;
+    }
+    .header {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      height: 4.44rem;
+      padding: 0 11%;
+      box-shadow: 0 2px 6px 0 rgba(231, 219, 219, 0.05);
+      font-weight: bold;
+      font-size: .77rem;
+      width: 100%;
+      box-sizing: border-box;
+      margin-bottom: 2rem;
+    }
+
+    .header .logo {
+      margin-right: auto;
+      color: rgb(0, 0, 0);
+      font-family: 'Pretendard', sans-serif;
+      font-size: 1.5rem;
+    }
+
+    .header li {
+      display: inline;
+      padding-right: 2.22rem;
+    }
+
+    .header li a {
+      text-decoration: none;
+      color: rgb(0, 0, 0);
+      font-family: 'Pretendard', sans-serif;
+    }
+
+    @media only screen and (max-width: 550px) {
+      .header {
+        flex-direction: column;
+      }
+
+      .header .logo {
+        margin-right: 0;
+      }
+    }
+
+    .main {
+      background: url('imgs/UU.jpg') no-repeat center center;
+      background-size: contain;
+      height: 400px;
+      width: 100%;
+    }
+
+    .supporting {
+      margin-bottom: 25px;
+    }
+
+    .supporting .thumbnail {
+      position: relative;
+      padding: 0;
+      border-radius: 0;
+      border: 0;
+      flex: 1;
+      text-align: center;
+      margin-bottom: 50px; /* 썸네일 블록 사이 간격 추가 */
+      overflow: hidden;
+    }
+
+    .supporting .thumbnail img {
+      width: 76%; /* 이미지 너비 조정 */
+      height: auto;
+      display: block;
+      margin: 0 auto 10px; /* 이미지와 텍스트 사이의 간격 추가 */
+      transition: opacity 0.3s ease;
+    }
+
+    .supporting .thumbnail .hover-text {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .supporting .thumbnail:hover img {
+      opacity: 0.3;
+    }
+
+    .supporting .thumbnail:hover .hover-text {
+      opacity: 1;
+    }
+
+    .supporting h2 {
+      color: #000000;
+      font-size: 24px;
+      font-weight: bold;
+      margin: 30px 0;
+      text-align: center;
+    }
+
+    .supporting .row {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .supporting .row .col-md-4 {
+      flex: 0 0 30%; /* 요소의 너비를 고정 */
+      margin: 0 10px;
+      box-sizing: border-box;
+    }
+
+    .footer {
+      background: #1a1a1a;
+      padding: 15px 0;
+      font-family: 'Pretendard', sans-serif; /* 폰트 변경 */
+      text-align: center;
+      color: #F2F2F2;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .footer .row {
+      margin: 0.5% 0;
+      padding: 0.3% 0;
+      font-size: 0.9em;
+    }
+
+    .footer .row a {
+      text-decoration: none;
+      color: #F2F2F2;
+      transition: color 0.3s;
+    }
+
+    .footer .row a:hover {
+      color: #000000;
+    }
+
+    .footer .row ul {
+      width: 100%;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      box-sizing: border-box;
+    }
+
+    .footer .row ul li {
+      display: inline-block;
+      margin: 0 10px;
+    }
+
+    .footer .social-icons {
+      margin: 10px 0;
+    }
+
+    .footer .social-icons a {
+      font-size: 1.2em;
+      margin: 0 10px;
+      color: #F2F2F2;
+      transition: color 0.3s;
+    }
+
+    .footer .social-icons a:hover {
+      color: #000000;
+    }
+
+    .footer .contact-info {
+      margin: 10px 0;
+      font-size: 0.9em;
+    }
+
+    @media (max-width: 720px) {
+      .footer {
+        text-align: center;
+        padding: 5%;
+      }
+
+      .footer .row ul li {
+        display: block;
+        margin: 10px 0;
+        text-align: center;
+      }
+
+      .footer .social-icons a {
+        margin: 0 5%;
+      }
+    }
+
+    /* New CSS for sliding sections */
+    .carousel {
+      display: flex;
+      overflow-x: scroll;
+      scroll-behavior: smooth;
+      width: 100%;
+    }
+
+    .carousel-section {
+      min-width: 100%;
+      box-sizing: border-box;
+      padding: 20px;
+    }
+
+    .button-container {
+      position: fixed;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      pointer-events: none;
+    }
+
+    .button-container button {
+      background-color: #000000;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      pointer-events: all;
+      font-size: 1rem;
+      border-radius: 20px; /* 둥근 모서리 추가 */
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+      transition: background-color 0.3s, transform 0.3s; /* 배경색 및 변형에 대한 전환 효과 추가 */
+    }
+
+    .button-container button:hover {
+      background-color: #000000; /* 호버 시 색상 변경 */
+      transform: translateY(-2px); /* 호버 시 살짝 위로 이동 */
+    }
+
+    .my-font {
+      font-size: 24px; /* H2와 동일한 폰트 크기 */
+      font-weight: bold; /* H2와 동일한 폰트 굵기 */
+      color: #000000; /* H2와 동일한 글자 색상 */
+    }
+
+    @media (max-width: 1024px) {
+      .container {
+        max-width: 100%;
+        padding: 0 20px;
+      }
+
+      .supporting .row .col-md-4 {
+        flex: 0 0 45%;
+        margin: 0 10px 20px;
+      }
+
+      .button-container {
+        display: none;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .header {
+        flex-direction: column;
+        padding: 0 5%;
+      }
+
+      .header .logo {
+        font-size: 1.2rem;
+      }
+
+      .header li {
+        padding-right: 1rem;
+      }
+
+      .supporting .row .col-md-4 {
+        flex: 0 0 100%;
+        margin: 0 0 20px;
+      }
+
+      .main {
+        height: 300px;
+      }
+
+      .supporting .thumbnail img {
+        width: 90%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .header {
+        padding: 0 2%;
+      }
+
+      .header .logo {
+        font-size: 1rem;
+      }
+
+      .header li {
+        padding-right: 0.5rem;
+      }
+
+      .supporting .thumbnail img {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <nav class="header">
+    <a href="6.html" class="logo">Ancient Korea</a>
+    <ul>
+      <li><a href="01.html">Introduction</a></li>
+        <li><a href="05.html">Photo</a></li>
+        <li><a href="04.html">Great</a></li>
+        <li><a href="02.html">Newspaper</a></li>
+        <li><a href="03.html">Goods</a></li>
+    </ul>
+  </nav>
+
+  <br><br><br><div class="main"></div>
+
+  <br><br><br><div class="carousel">
+    <div class="carousel-section">
+      <div class="supporting">
+        <div class="container">
+          <h2 class="my-font">recent arrivals</h2><br>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="thumbnail">
+                <img src="imgs/dd.png" alt="Carrots">
+                <div class="hover-text">손으로 직접 만든 아름다운 자개 손거울. 전통적인 궁보 무늬가 특징입니다.</div>
+                <p><strong>누름자개손거울-궁보</strong></p>
+                <p>₩15,000</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="thumbnail">
+                <img src="imgs/ee.png" alt="Cauliflower">
+                <div class="hover-text">화사한 담화나비 무늬가 돋보이는 자개 손거울. 특별한 선물로 좋습니다.</div>
+                <p><strong>누름자개손거울-담화나비</strong></p>
+                <p>₩18,000</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="thumbnail">
+                <img src="imgs/qe.png" alt="Peppers">
+                <div class="hover-text">전통 목단나비 무늬가 새겨진 고급스러운 자개 손거울입니다.</div>
+                <p><strong>누름자개손거울-목단나비</strong></p>
+                <p>₩20,000</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="thumbnail">
+                <img src="imgs/443.png" alt="Carrots">
+                <div class="hover-text">화려한 모란도 무늬가 그려진 전통 민화부채. 여름철 시원하게 사용하세요.</div>
+                <p><strong>전통 민화부채 모란도 적</strong></p>
+                <p>₩25,000</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="thumbnail">
+                <img src="imgs/CA.png" alt="Cauliflower">
+                <div class="hover-text">일일오봉도 무늬가 그려진 전통 민화부채. 실내 장식으로도 좋습니다.</div>
+                <p><strong>전통 민화부채 일일오봉도</strong></p>
+                <p>₩30,000</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="thumbnail">
+                <img src="imgs/WQ.png" alt="Peppers">
+                <div class="hover-text">핑크 모란도 무늬가 인상적인 전통 민화부채입니다. 선물용으로 추천드립니다.</div>
+                <p><strong>전통 민화부채 핑크 모란도</strong></p>
+                <p>₩28,000</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="thumbnail">
+                <img src="imgs/88.png" alt="Carrots">
+                <div class="hover-text">여의주문 무늬가 새겨진 고급스러운 민속화 손수건입니다.</div>
+                <p><strong>민속화 손수건-여의주문</strong></p>
+                <p>₩8,000</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="thumbnail">
+                <img src="imgs/115.png" alt="Cauliflower">
+                <div class="hover-text">씨름 장면을 담은 민속화 손수건. 전통적인 디자인이 돋보입니다.</div>
+                <p><strong>민속화 손수건-씨름</strong></p>
+                <p>₩9,000</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="thumbnail">
+                <img src="imgs/22.png" alt="Peppers">
+                <div class="hover-text">훈민정음 한글 무늬가 새겨진 민속화 손수건. 한국의 문화를 느껴보세요.</div>
+                <p><strong>민속화 손수건-훈민정음 한글</strong></p>
+                <p>₩10,000</p>
+              </div>
+            </div>            
+          </div>
+        </div>
+      </div>
+    </div>
+    &nbsp;&nbsp;&nbsp;&nbsp;<div class="carousel-section">
+      <div class="supporting">
+        <div class="container">
+          <h2>recent arrivals</h2><br>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="thumbnail">
+                <img src="imgs/EEE.png" alt="Potatoes">
+                <div class="hover-text">핑크색 색동 무늬의 소산당 파우치. 소지품을 깔끔하게 보관하세요.</div>
+                <p><strong>소산당 색동파우치 핑크</strong></p>
+                <p>₩12,000</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="thumbnail">
+                <img src="imgs/SSS.png" alt="Onions">
+                <div class="hover-text">자주색 색동 무늬의 소산당 파우치. 전통적인 아름다움을 느껴보세요.</div>
+                <p><strong>소산당 색동파우치 자주</strong></p>
+                <p>₩12,000</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="thumbnail">
+                <img src="imgs/XX.png" alt="Tomatoes">
+                <div class="hover-text">초록색 색동 무늬의 소산당 파우치. 실용적이고 아름다운 디자인입니다.</div>
+                <p><strong>소산당 색동파우치 초록</strong></p>
+                <p>₩12,000</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="thumbnail">
+                <img src="imgs/66.png" alt="Potatoes">
+                <div class="hover-text">학 무늬가 새겨진 청자 수저받침 5종 세트. 전통의 멋을 더해줍니다.</div>
+                <p><strong>청자수저받침 학5종세트</strong></p>
+                <p>₩35,000</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="thumbnail">
+                <img src="imgs/99.png" alt="Onions">
+                <div class="hover-text">다섯 마리 오리 무늬의 청자 수저받침 세트. 세련된 디자인이 특징입니다.</div>
+                <p><strong>청자수저받침 다섯마리오리</strong></p>
+                <p>₩33,000</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="thumbnail">
+                <img src="imgs/33.png" alt="Tomatoes">
+                <div class="hover-text">다섯 마리 거북이 무늬의 청자 수저받침 세트. 전통미와 실용성을 겸비했습니다.</div>
+                <p><strong>청자수저받침 다섯마리거북이</strong></p>
+                <p>₩33,000</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="thumbnail">
+                <img src="imgs/ccv.png" alt="Potatoes">
+                <div class="hover-text">당초 무늬가 새겨진 고급스러운 편지칼. 세련된 디자인이 돋보입니다.</div>
+                <p><strong>편지칼-당초무늬</strong></p>
+                <p>₩15,000</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="thumbnail">
+                <img src="imgs/543.png" alt="Onions">
+                <div class="hover-text">쌍학 무늬가 인상적인 편지칼. 전통적인 아름다움을 담았습니다.</div>
+                <p><strong>편지칼-쌍학</strong></p>
+                <p>₩15,000</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="thumbnail">
+                <img src="imgs/555.png" alt="Tomatoes">
+                <div class="hover-text">용 무늬가 새겨진 웅장한 느낌의 편지칼입니다.</div>
+                <p><strong>편지칼-용</strong></p>
+                <p>₩15,000</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-section">
+      <div class="supporting">
+        <div class="container">
+          <h2>recent arrivals</h2><br> 
+          <div class="row">
+            <div class="col-md-4">
+              <div class="thumbnail">
+                <img src="imgs/54.png" alt="Potatoes">
+                <div class="hover-text">십장생꽃무늬가 새겨진 명함케이스와 볼펜 세트. 고급스러운 디자인입니다.</div>
+                <p><strong>명함케이스,볼펜 -십장생꽃무늬</strong></p>
+                <p>₩20,000</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="thumbnail">
+                <img src="imgs/77.png" alt="Onions">
+                <div class="hover-text">조각보단청꽃 무늬의 명함케이스와 볼펜 세트. 세련된 디자인이 돋보입니다.</div>
+                <p><strong>명함케이스,볼펜 -조각보단청꽃</strong></p>
+                <p>₩20,000</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="thumbnail">
+                <img src="imgs/cs.png" alt="Tomatoes">
+                <div class="hover-text">한국의탈 무늬가 새겨진 명함케이스와 볼펜 세트. 전통미와 실용성을 겸비했습니다.</div>
+                <p><strong>명함케이스,볼펜 -한국의탈</strong></p>
+                <p>₩20,000</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="thumbnail">
+                <img src="imgs/mm.png" alt="Potatoes">
+                <div class="hover-text">남색 비단 전통 오침노트. 우아한 디자인과 실용성을 모두 갖추었습니다.</div>
+                <p><strong>비단전통오침노트-남색</strong></p>
+                <p>₩10,000</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="thumbnail">
+                <img src="imgs/nn.png" alt="Onions">
+                <div class="hover-text">연한남색 비단 전통 오침노트. 전통적인 멋과 현대적인 감각이 어우러져 있습니다.</div>
+                <p><strong>비단전통오침노트-연한남색</strong></p>
+                <p>₩10,000</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="thumbnail">
+                <img src="imgs/tt.png" alt="Tomatoes">
+                <div class="hover-text">빨간색 비단 전통 오침노트. 눈길을 끄는 화려한 디자인입니다.</div>
+                <p><strong>비단전통오침노트-빨간색</strong></p>
+                <p>₩10,000</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="thumbnail">
+                <img src="imgs/gg.png" alt="Potatoes">
+                <div class="hover-text">핑크색 자개 매듭 USB. 전통과 현대의 조화를 이룬 제품입니다.</div>
+                <p><strong>USB 자개 매듭-핑크</strong></p>
+                <p>₩18,000</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="thumbnail">
+                <img src="imgs/rr.png" alt="Onions">
+                <div class="hover-text">갈색 자개 매듭 USB. 고급스러운 디자인으로 특별한 선물로 적합합니다.</div>
+                <p><strong>USB 자개 매듭-갈색</strong></p>
+                <p>₩18,000</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="thumbnail">
+                <img src="imgs/zz.png" alt="Tomatoes">
+                <div class="hover-text">파랑색 자개 매듭 USB. 세련된 디자인과 실용성을 갖춘 제품입니다.</div>
+                <p><strong>USB 자개 매듭-파랑</strong></p>
+                <p>₩18,000</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="button-container">
+    <button onclick="document.querySelector('.carousel').scrollBy({left: -window.innerWidth, behavior: 'smooth'})">Prev</button>
+    <button onclick="document.querySelector('.carousel').scrollBy({left: window.innerWidth, behavior: 'smooth'})">Next</button>
+  </div>
+
+  <footer class="footer">
+    <div class="row">
+      <ul>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+    <div class="row">
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+    </div>
+    <div class="row">
+      &copy; 2024 Museum of Culture. All rights reserved.
+    </div>
+  </footer>
+
+</body>
+</html>

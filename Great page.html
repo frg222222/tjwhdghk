@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Store</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Pretendard', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #111;
+            background-color: rgba(255, 255, 255, 0.284);
+            color: rgb(0, 0, 0);
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .header {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      height: 4.44rem;
+      padding: 0 11%;
+      box-shadow: 0 2px 6px 0 rgba(231, 219, 219, 0.05);
+      font-weight: bold;
+      font-size: .77rem;
+      width: 100%;
+      box-sizing: border-box;
+      margin-bottom: 2rem;
+    }
+
+    .header .logo {
+      margin-right: auto;
+      color: rgb(0, 0, 0);
+      font-family: 'Pretendard', sans-serif;
+      font-size: 1.5rem;
+    }
+
+    .header li {
+      display: inline;
+      padding-right: 2.22rem;
+    }
+
+    .header li a {
+      text-decoration: none;
+      color: rgb(0, 0, 0);
+      font-family: 'Pretendard', sans-serif;
+    }
+
+    @media only screen and (max-width: 550px) {
+      .header {
+        flex-direction: column;
+      }
+
+      .header .logo {
+        margin-right: 0;
+      }
+    }
+        .scrolling-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            width: 100%;
+        }
+
+        .scrolling-wrapper {
+            display: flex;
+            overflow: hidden;
+            width: 70%;
+            gap: 10px;
+            scroll-snap-type: x mandatory;
+        }
+
+        .product-card {
+            flex: 0 0 auto;
+            width: 300px;
+            margin: 5px;
+            height: 600px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(0, 0, 0, 0.2);
+            text-align: center;
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .product-image {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        .product-details {
+            padding: 15px;
+        }
+
+        .product-title, .product-price {
+            color: rgb(0, 0, 0);
+            font-family: 'Pretendard', sans-serif;
+        }
+
+        .add-to-cart {
+            padding: 10px 20px;
+            border: 2px solid #0f0;
+            border-radius: 10px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #0f0;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .add-to-cart:hover {
+            background-color: #0f0;
+            color: #000;
+            transform: scale(1.05);
+        }
+
+        .footer {
+            padding: 15px 0;
+            font-family: 'Pretendard', sans-serif;
+            text-align: center;
+            color: #000000;
+            background: white;
+            width: 100%;
+            box-sizing: border-box;
+            margin-top: 2rem;
+        }
+
+        .footer .row {
+            margin: 0.5% 0;
+            padding: 0.3% 0;
+            font-size: 0.9em;
+        }
+
+        .footer .row a {
+            text-decoration: none;
+            color: #000000;
+            transition: color 0.3s;
+            font-family: 'Pretendard', sans-serif;
+        }
+
+        .footer .row a:hover {
+            color: #FFA726;
+        }
+
+        .footer .row ul {
+            width: 100%;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            box-sizing: border-box;
+        }
+
+        .footer .row ul li {
+            display: inline-block;
+            margin: 0 10px;
+        }
+
+        .footer .social-icons {
+            margin: 10px 0;
+        }
+
+        .footer .social-icons a {
+            font-size: 1.2em;
+            margin: 0 10px;
+            color: #F2F2F2;
+            transition: color 0.3s;
+        }
+
+        .footer .social-icons a:hover {
+            color: #FFA726;
+        }
+
+        .footer .contact-info {
+            margin: 10px 0;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 720px) {
+            .footer {
+                text-align: center;
+                padding: 5%;
+            }
+
+            .footer .row ul li {
+                display: block;
+                margin: 10px 0;
+                text-align: center;
+            }
+
+            .footer .social-icons a {
+                margin: 0 5%;
+            }
+        }
+
+        .scroll-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .scroll-button.left {
+            left: 0;
+        }
+
+        .scroll-button.right {
+            right: 0;
+        }
+
+        @media screen and (max-width: 768px) {
+            .scroll-button {
+                display: none;
+            }
+
+            .product-card {
+                width: 80%;
+                margin: 10px auto;
+            }
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        .modal-content {
+            background-color: rgba(48, 48, 48, 0.8);
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 55%;
+            height: 82%;
+            border-radius: 10px;
+            text-align: center;
+            position: relative;
+        }
+
+        .modal-title-left {
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            color: white;
+            font-family: 'Pretendard', sans-serif;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .random-text {
+            position: absolute;
+            color: white;
+            font-size: 16px;
+            font-family: 'Pretendard', sans-serif;
+        }
+
+        .text-hangul-modal1 { top: 28%; left: 30%; font-size: 18px; }
+        .text-joseon-modal1 { top: 40%; left: 50%; font-size: 22px; }
+        .text-nongsajikseol-modal1 { top: 60%; left: 20%; font-size: 24px; }
+        .text-gogibanchan-modal1 { top: 72%; left: 70%; font-size: 20px; }
+        .text-hunminjeongeum-modal1 { top: 50%; left: 80%; font-size: 26px; }
+
+        .text-hangul-modal2 { top: 32%; left: 25%; font-size: 20px; }
+        .text-joseon-modal2 { top: 42%; left: 45%; font-size: 22px; }
+        .text-nongsajikseol-modal2 { top: 58%; left: 25%; font-size: 18px; }
+        .text-gogibanchan-modal2 { top: 68%; left: 65%; font-size: 26px; }
+        .text-hunminjeongeum-modal2 { top: 52%; left: 75%; font-size: 24px; }
+
+        .text-hangul-modal3 { top: 30%; left: 28%; font-size: 24px; }
+        .text-joseon-modal3 { top: 42%; left: 48%; font-size: 20px; }
+        .text-nongsajikseol-modal3 { top: 62%; left: 22%; font-size: 26px; }
+        .text-gogibanchan-modal3 { top: 70%; left: 68%; font-size: 22px; }
+        .text-hunminjeongeum-modal3 { top: 50%; left: 78%; font-size: 18px; }
+
+        .text-hangul-modal4 { top: 26%; left: 32%; font-size: 20px; }
+        .text-joseon-modal4 { top: 38%; left: 52%; font-size: 18px; }
+        .text-nongsajikseol-modal4 { top: 60%; left: 18%; font-size: 24px; }
+        .text-gogibanchan-modal4 { top: 74%; left: 66%; font-size: 22px; }
+        .text-hunminjeongeum-modal4 { top: 34%; left: 72%; font-size: 26px; }
+
+        .text-hangul-modal5 { top: 18%; left: 30%; font-size: 22px; }
+        .text-joseon-modal5 { top: 40%; left: 50%; font-size: 26px; }
+        .text-nongsajikseol-modal5 { top: 60%; left: 20%; font-size: 18px; }
+        .text-gogibanchan-modal5 { top: 28%; left: 70%; font-size: 24px; }
+        .text-hunminjeongeum-modal5 { top: 68%; left: 68%; font-size: 20px; }
+
+        .text-hangul-modal6 { top: 28%; left: 32%; font-size: 18px; }
+        .text-joseon-modal6 { top: 40%; left: 48%; font-size: 24px; }
+        .text-nongsajikseol-modal6 { top: 62%; left: 24%; font-size: 22px; }
+        .text-gogibanchan-modal6 { top: 74%; left: 72%; font-size: 20px; }
+        .text-hunminjeongeum-modal6 { top: 52%; left: 76%; font-size: 26px; }
+
+        .text-hangul-modal7 { top: 32%; left: 28%; font-size: 24px; }
+        .text-joseon-modal7 { top: 42%; left: 46%; font-size: 26px; }
+        .text-nongsajikseol-modal7 { top: 60%; left: 26%; font-size: 18px; }
+        .text-gogibanchan-modal7 { top: 68%; left: 68%; font-size: 22px; }
+        .text-hunminjeongeum-modal7 { top: 56%; left: 78%; font-size: 20px; }
+
+        .text-hangul-modal8 { top: 28%; left: 30%; font-size: 22px; }
+        .text-joseon-modal8 { top: 40%; left: 52%; font-size: 20px; }
+        .text-nongsajikseol-modal8 { top: 60%; left: 22%; font-size: 26px; }
+        .text-gogibanchan-modal8 { top: 72%; left: 70%; font-size: 24px; }
+        .text-hunminjeongeum-modal8 { top: 50%; left: 78%; font-size: 18px; }
+
+        .modal-footer {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            color: white;
+            font-family: 'Pretendard', sans-serif;
+        }
+
+        .hover-overlay {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            z-index: 1000;
+            width: 55%;
+            height: 84%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-family: 'Pretendard', sans-serif;
+        }
+
+        .product-card.sejong-card {
+            background-color: #8B0000;
+            border: 2px solid #FFD700;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .product-card.sejong-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .product-card.sejong-card .product-title, 
+        .product-card.sejong-card .product-price {
+            color: #FFD700;
+            font-weight: bold;
+        }
+
+        .product-card.sejong-card .add-to-cart.sejong-button {
+            background-color: #FFD700;
+            color: #8B0000;
+            border: 3px solid #8B0000;
+            font-weight: bold;
+            padding: 10px 20px;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+        }
+
+        .product-card.sejong-card .add-to-cart.sejong-button:hover {
+            background-color: #8B0000;
+            color: #FFD700;
+            transform: scale(1.05);
+        }
+
+        .sejong-button {
+            background-color: #FFD700;
+            color: #B22222;
+            border: 3px solid #B22222;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            text-transform: uppercase;
+            font-family: 'Pretendard', sans-serif;
+            padding: 10px 20px;
+        }
+
+        .sejong-button:hover {
+            background-color: #B22222;
+            color: #FFD700;
+            transform: scale(1.05);
+        }
+
+        .product-card.yi-sun-sin-card {
+            background-color: #1E3A8A;
+            border: 2px solid #FFD700;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .product-card.yi-sun-sin-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .product-card.yi-sun-sin-card .product-title, 
+        .product-card.yi-sun-sin-card .product-price {
+            color: #FFD700;
+            font-weight: bold;
+        }
+
+        .product-card.yi-sun-sin-card .add-to-cart.yi-sun-sin-button {
+            background-color: #FFD700;
+            color: #1E3A8A;
+            border: 3px solid #1E3A8A;
+            font-weight: bold;
+            padding: 10px 20px;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+        }
+
+        .product-card.yi-sun-sin-card .add-to-cart.yi-sun-sin-button:hover {
+            background-color: #1E3A8A;
+            color: #FFD700;
+            transform: scale(1.05);
+        }
+
+        .add-to-cart.yi-sun-sin {
+            background-color: #1E3A8A;
+            color: #FFD700;
+            border: 3px solid #FFD700;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            text-transform: uppercase;
+            font-family: 'Pretendard', sans-serif;
+            padding: 10px 20px;
+        }
+
+        .add-to-cart.yi-sun-sin:hover {
+            background-color: #FFD700;
+            color: #1E3A8A;
+            transform: scale(1.05);
+        }
+
+        .product-card.jang-young-sil-card {
+            background-color: #006400;
+            border: 2px solid #FFD700;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .product-card.jang-young-sil-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .product-card.jang-young-sil-card .product-title, 
+        .product-card.jang-young-sil-card .product-price {
+            color: #FFD700;
+            font-weight: bold;
+        }
+
+        .product-card.jang-young-sil-card .add-to-cart.jang-young-sil-button {
+            background-color: #FFD700;
+            color: #006400;
+            border: 3px solid #006400;
+            font-weight: bold;
+            padding: 10px 20px;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+        }
+
+        .product-card.jang-young-sil-card .add-to-cart.jang-young-sil-button:hover {
+            background-color: #006400;
+            color: #FFD700;
+            transform: scale(1.05);
+        }
+
+        .product-card {
+            flex: 0 0 auto;
+            width: 300px;
+            margin: 5px;
+            height: 600px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+            border: 2px solid rgba(0, 0, 0, 0.2);
+            text-align: center;
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            font-family: 'Pretendard', sans-serif;
+            background-image: url('https://www.transparenttextures.com/patterns/old-wall.png');
+            background-size: cover;
+            color: #333;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .product-image {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        .product-details {
+            padding: 15px;
+        }
+
+        .product-title, .product-price {
+            font-weight: bold;
+        }
+
+        .add-to-cart {
+            padding: 10px 20px;
+            border: 2px solid #0f0;
+            border-radius: 10px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #0f0;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .add-to-cart:hover {
+            background-color: #0f0;
+            color: #000;
+            transform: scale(1.05);
+        }
+
+        .product-card.lee-bong-chang-card {
+            background-color: rgba(211, 211, 211, 0.8);
+            border: 2px solid rgba(169, 169, 169, 0.8);
+            background-image: url('https://www.transparenttextures.com/patterns/old-wall.png');
+        }
+
+        .product-card.lee-bong-chang-card .add-to-cart {
+            background-color: rgba(169, 169, 169, 0.7);
+            color: #fff;
+            border: 2px solid rgba(211, 211, 211, 0.8);
+        }
+
+        .product-card.yu-gwan-sun-card {
+            background-color: rgba(240, 240, 240, 0.8);
+            border: 2px solid rgba(169, 169, 169, 0.8);
+            background-image: url('https://www.transparenttextures.com/patterns/old-wall.png');
+        }
+
+        .product-card.yu-gwan-sun-card .add-to-cart {
+            background-color: rgba(211, 211, 211, 0.7);
+            color: #333;
+            border: 2px solid rgba(169, 169, 169, 0.8);
+        }
+
+        .product-card.an-jung-geun-card {
+            background-color: rgba(220, 220, 220, 0.8);
+            border: 2px solid rgba(169, 169, 169, 0.8);
+            background-image: url('https://www.transparenttextures.com/patterns/old-wall.png');
+        }
+
+        .product-card.an-jung-geun-card .add-to-cart {
+            background-color: rgba(169, 169, 169, 0.7);
+            color: #fff;
+            border: 2px solid rgba(220, 220, 220, 0.8);
+        }
+    </style>
+</head>
+<body>
+<!-- Header -->
+<nav class="header">
+    <a href="6.html" class="logo">Ancient Korea</a>
+    <ul>
+        <li><a href="01.html">Introduction</a></li>
+        <li><a href="05.html">Photo</a></li>
+        <li><a href="04.html">Great</a></li>
+        <li><a href="02.html">Newspaper</a></li>
+        <li><a href="03.html">Goods</a></li>
+    </ul>
+</nav>
+
+<div class="scrolling-container">
+    <button class="scroll-button left">&lt;</button>
+    <div class="scrolling-wrapper" id="scrolling-wrapper">
+        <div class="product-card" onclick="openModal('modal1')" style="width: 680px; height: 601px;">
+            <span class="product-year">2024</span>
+            <img src="imgs/adz.jpg" alt="Product Image" class="product-image" style="width: 660px; height: 370px;">
+            <div class="product-details">
+                <h2 class="product-title">6.25 학도병들</h2>
+                <p class="product-price">$19.99</p>
+                <button class="add-to-cart" style="background-color: #ffffff; color: #000000; border: 2px solid #000000;">이름없는 병사</button>
+            </div>
+        </div>
+        
+        <div class="product-card jang-young-sil-card" onclick="openModal('modal3')">
+            <span class="product-year">조선시대</span>
+            <img src="imgs/iii.jpg" alt="Product Image" class="product-image">
+            <div class="product-details">
+                <h2 class="product-title">장영실</h2>
+                <p class="product-price">출생:? ~ ?</p>
+                <button class="add-to-cart jang-young-sil-button" style="background-color: #008300; color: #ffd700; border: 2px solid #006400;">과학자</button>
+            </div>
+        </div>
+
+        <div class="product-card sejong-card" onclick="openModal('modal4')">
+            <span class="product-year">조선시대</span>
+            <img src="imgs/qx.png" alt="Product Image" class="product-image">
+            <div class="product-details">
+                <h2 class="product-title">세종대왕</h2>
+                <p class="product-price">출생:1397년 5월 15일</p>
+                <button class="add-to-cart sejong-button" style="background-color: #ffd700; color: #8b0000; border: 2px solid #ffd700;">조선 왕세자</button>
+            </div>
+        </div>
+
+        <div class="product-card yi-sun-sin-card" onclick="openModal('modal5')">
+            <span class="product-year">조선시대</span>
+            <img src="imgs/dq.jpg" alt="Product Image" class="product-image">
+            <div class="product-details">
+                <h2 class="product-title">이순신</h2>
+                <p class="product-price">출생:1545년 4월 28일</p>
+                <button class="add-to-cart yi-sun-sin-button" style="background-color: #1e3a8a; color: #ffd700; border: 2px solid #1e3a8a;">구국 영웅</button>
+            </div>
+        </div>
+
+        <div class="product-card" onclick="openModal('modal6')">
+            <span class="product-year">일제강점기</span>
+            <img src="imgs/QS.png" alt="Product Image" class="product-image">
+            <div class="product-details">
+                <h2 class="product-title">이봉창</h2>
+                <p class="product-price">출생:1900년 8월 10일</p>
+                <button class="add-to-cart" style="background-color: #eeeeee; color: #000000; border: 2px solid #000000;">한인 애국단</button>
+            </div>
+        </div>
+        <div class="product-card" onclick="openModal('modal7')">
+            <span class="product-year">일제강점기</span>
+            <img src="imgs/CV.jpg" alt="Product Image" class="product-image">
+            <div class="product-details">
+                <h2 class="product-title">안중근</h2>
+                <p class="product-price">출생:1879년 9월 2일</p>
+                <button class="add-to-cart" style="background-color: #ffffff; color: #000000; border: 2px solid #000000;">한인 애국단</button>
+            </div>
+        </div>
+        <div class="product-card" onclick="openModal('modal8')">
+            <span class="product-year">일제강점기</span>
+            <img src="imgs/ㄹㄹ.jpg" alt="Product Image" class="product-image">
+            <div class="product-details">
+                <h2 class="product-title">유관순</h2>
+                <p class="product-price">출생: 1902년 12월 16일</p>
+                <button class="add-to-cart" style="background-color: #ffffff; color: #000000; border: 2px solid #000000;">열사</button>
+            </div>
+        </div>
+    </div>
+    <button class="scroll-button right">&gt;</button>
+</div>
+
+<!-- 모달창들 -->
+<div id="modal1" class="modal">
+    <div class="modal-content">
+        <h1 class="modal-title-left">6.25 학도병들</h1>
+        <span class="close">&times;</span>
+    
+        <p class="random-text text-hangul-modal4" data-description="미성년자와 학도병의 참여는 당시 대한민국의 열악한 전황 속에서 큰 힘이 되었습니다. 이들은 자신의 학업과 미래를 포기하고 국가를 위해 싸웠으며, 그들의 용기와 희생정신은 전쟁의 승리에 큰 기여를 했습니다.">미성년자</p>
+        <p class="random-text text-joseon-modal4" data-description="도병들의 희생은 그들의 강한 애국심과 용기를 보여줍니다. 이들은 나라를 지키기 위해 자신의 삶을 기꺼이 내놓았으며, 이는 오늘날까지도 큰 감동을 주고 있습니다.">훈련</p>
+        <p class="random-text text-nongsajikseol-modal4" data-description="이천, 장영실, 김조 등이 제작에 참여하였습니다. 가마솥이 하늘을 올려다 보는 것 같이 생긴 모양의 해시계라는 뜻에서 이런 이름이 붙여졌습니다. 특히 세종실록에 글을 모르는 백성들을 위해 12지신 그림으로 그려서 시간을 알게 했다는 기록이 있어 주목할 만 합니다.">희생</p>
+        <p class="random-text text-gogibanchan-modal4" data-description="6.25 전쟁 초기에는 자발적인 지원이 많았지만, 시간이 지남에 따라 병력 부족을 보충하기 위해 대규모 징집이 이루어졌습니다. 이러한 징집병들은 전투 경험이 부족했으나, 국가의 부름에 응하여 헌신적으로 전쟁에 참여했습니다.">징집</p>
+        <p id="modal-price"></p>
+        <p id="modal-description"></p>
+        <h3 class="modal-footer">“용감히 싸워서 이기고 학교에 돌아오겠습니다.”</h3>
+    </div>
+</div>
+
+<div id="modal2" class="modal">
+    <div class="modal-content">
+        <h1 class="modal-title-left">Product 2</h1>
+        <span class="close">&times;</span>
+        <h2 id="modal-title">Product 2</h2>
+        <p class="random-text text-hangul-modal2" data-description="이 제품은 고급 소재로 만들어져 뛰어난 품질을 자랑합니다.">2024</p>
+        <p id="modal-price">$29.99</p>
+        <p id="modal-description">이 제품은 고급 소재로 만들어져 뛰어난 품질을 자랑합니다.</p>
+        <h3 class="modal-footer">이 제품은 고급 소재로 제작되었습니다.</h3>
+    </div>
+</div>
+
+<div id="modal3" class="modal">
+    <div class="modal-content">
+        <h1 class="modal-title-left">장영실(蔣英實)</h1>    
+        <span class="close">&times;</span>
+    
+        <p class="random-text text-hangul-modal4" data-description="장영실과 세종대왕의 관계는 조선 시대 과학과 기술 발전에 있어서 매우 중요한 관계로 평가받고 있습니다. 두 사람은 각각 뛰어난 능력과 비전을 가지고 조선의 과학 기술을 발전시키기 위해 협력했습니다. 이들의 관계를 통해 조선 시대의 여러 중요한 발명품들이 탄생할 수 있었습니다.">세종대왕</p>
+        <p class="random-text text-joseon-modal4" data-description="장영실은 노비 출신으로 태어났지만, 그의 뛰어난 재능과 능력을 인정받아 세종대왕의 후원을 받았습니다. 이는 당시 사회에서 매우 이례적인 일이었으며, 그의 성공은 많은 사람들에게 큰 영감을 주었습니다.">노비</p>
+        <p class="random-text text-nongsajikseol-modal4" data-description="이천, 장영실, 김조 등이 제작에 참여하였습니다. 가마솥이 하늘을 올려다 보는 것 같이 생긴 모양의 해시계라는 뜻에서 이런 이름이 붙여졌습니다. 특히 세종실록에 글을 모르는 백성들을 위해 12지신 그림으로 그려서 시간을 알게 했다는 기록이 있어 주목할 만 합니다.">앙부일구</p>
+        <p class="random-text text-gogibanchan-modal4" data-description="옥류관은 정식 명칭은 옥류천의 물을 끌어들여 자동으로 시간을 알리는 장치로, 주로 물시계로 불리며, 세종대왕 시기에 만들어진 장영실의 대표적인 발명품 중 하나입니다.">옥루</p>
+        <p class="random-text text-hunminjeongeum-modal4" data-description="측우기(測雨器)는 강우량을 측정하기 위한 우량계의 일종으로, 1442년 5월 19일, 세종의 명에 따라 당시 세자였던 문종이 고안하고 장영실 등이 제작한 발명품입니다. 측우기가 단순 빗물받이가 아닌 세계 최초로 국가 단위로 표준화된 기상측정기구였다는 점입니다. 이는 16세기 이탈리아보다 무려 200여 년을 앞서갑니다.">측우기</p>
+        <p id="modal-price"></p>
+        <p id="modal-description"></p>
+        <h3 class="modal-footer">"내가 남을 알지 못함이 죄일뿐,남이 나를 알아주지 않음이 무슨 죄인가."</h3>
+    </div>
+</div>
+
+<div id="modal4" class="modal">
+    <div class="modal-content">
+        <h1 class="modal-title-left">세종(世宗)</h1>
+        <span class="close">&times;</span>
+    
+        <p class="random-text text-hangul-modal4" data-description="세종대왕은 백성들을 위해 쉽게 배울 수 있는 문자를 만들어야겠다는 결심으로 한글 창제를 추진하였습니다. 많은 반대에도 불구하고, 세종대왕은 끝내 자신의 뜻을 관찰시켜 1443년 훈민정을 창제하였습니다.">한글</p>
+        <p class="random-text text-joseon-modal4" data-description="세종대왕이 천문학 발전을 위해 편찬하게 한 역법서로, 조선 시대의 천문학과 시간 측정에 있어 중요한 역할을 했습니다. 세종대왕은 천문학과 역법의 중요성을 깊이 인식하고, 이를 연구하고 발전시키기 위해 학자들을 적극 지원했습니다.">칠정산</p>
+        <p class="random-text text-nongsajikseol-modal4" data-description="조선시대에 발간된 농서. 세종의 왕명으로 정초가 편찬하여 세종 11년(1429) 간행. 논밭갈이에 관한 내용과 종자의 선택과 저장법에 관한 내용 삼(麻), 벼, 기장·조·수수, 피, 콩·팥·녹두, 보리·밀, 참깨, 메밀에 재배법에 관한 내용 총 10항목으로 구성되어 있습니다. 그 뒤에는 밭작물의 파종법과 벼의 파종법, 경작방식에 관해 나옵니다.">농사직설</p>
+        <p class="random-text text-gogibanchan-modal4" data-description="세종대왕은 어렸을 때부터 고기 없이는 밥을 못 드셨다고 기록이 많이 나와 있습니다. 고기에 대한 얘기들은 공식 기록인 세종실록에도 많이 존재합니다. 하지만 이렇게 편식, 운동 부족, 과로, 스트레스, 고된 정사와 같은 결코 좋다고 할 수 없는 생활 습관으로 인해 각종 질병을 앓았다는 기록이 특히나 많은 왕입니다.">고기반찬</p>
+        <p class="random-text text-hunminjeongeum-modal4" data-description="훈민정음은 '백성을 가르치는 바른 소리'라는 뜻을 가지고 있습니다. '훈민정음'이라고 부르는 대상은 두 가지가 있는데, 첫째는 1443년 음력 12월(양력 1444년 1월)에 세종대왕이 만든 한국어의 표기 체계, 즉 오늘날의 한글을 창제 당시 부른 이름입니다. 둘째는 1446년 9월에 발간된 책의 이름입니다">훈민정음</p>
+        <p id="modal-price"></p>
+        <p id="modal-description"></p>
+        <h3 class="modal-footer">"나라를 다스리는 근본은 백성의 마음을 얻는 것이다."</h3>
+    </div>
+</div>
+
+<div id="modal5" class="modal">
+    <div class="modal-content">
+        <h1 class="modal-title-left">이순신(李舜臣)</h1>
+        <span class="close">&times;</span>
+    
+        <p class="random-text text-hangul-modal5" data-description="세간에는 이순신 장군이 직접 거북선을 개발했다고 알려져 있습니다. 기존 조선 수군의 주력함이었던 판옥선을 개량한 것으로, 지붕을 덧씌워 방어력을 높이고 포문을 많이 설치하여 사격 공격을 용이하게 하도록 구조를 변경하였습니다. 앞에는 용머리 형태의 충각 겸 포문을 달아 돌격전에도 용이하게 설계되었습니다. 거북선은 2차 출정부터 투입하여 사천 해전을 시작으로 혁혁한 공을 세웠습니다.">거북선</p>
+        <p class="random-text text-joseon-modal5" data-description="임진왜란은 조선에게 큰 위기를 안겨주었습니다. 조선은 경제적으로 취약했고, 정치적으로 불안정했으며, 군사적으로 열세였습니다. 이러한 상황에서 이순신 장군이 등장했습니다. 이순신 장군은 조선의 해군을 재건하고, 수많은 해전에서 승리했습니다. 이순신 장군의 활약으로 조선은 일본의 침략을 물리칠 수 있었습니다.">임진왜란</p>
+        <p class="random-text text-nongsajikseol-modal5" data-description="조선 선조 시기의 무신(武臣)이었던 충무공 이순신이 1592년 ~ 1598년(임란 7년) 동안 군중에서 쓴 일기를 말합니다. 정확히는 임진왜란이 발발하기 3개월 전인 1592년(선조 25년) 정월(1월) 1일부터 전사하기 이틀 전인 1598년(선조 31년) 11월 17일(양력 1598년 12월 14일)까지 2,539일간 기록한 일기입니다.">난중일기</p>
+        <p class="random-text text-gogibanchan-modal5" data-description="한국 사회에서 '충무공'이라 하면 대부분 이순신 장군을 가리킵니다. 그의 삼도수군통제영이 있었던 경상남도 통영군에서 과거 그의 시호를 딴 '충무시'가 분리되었다가 1995년, 통영군과 도로 통합되었습니다. 충무김밥이 이때의 흔적입니다.">충무공</p>
+        <p class="random-text text-hunminjeongeum-modal5" data-description="충무공 이순신이 지니고 다녔다고 알려진 길이가 1장(약 3미터)이 넘는 초대형 환도입니다. 이게 실존한다면 당연히 대한민국의 국보로 지정되는데 부족함이 없는 보물이지만, 안타깝게도 100년째 행방이 묘연합니다.">쌍룡검</p>
+        <p id="modal-price"></p>
+        <p id="modal-description"></p>
+        <h3 class="modal-footer">必死則生 幸生則死 (필사즉생 행색즉사) <br> "반드시 죽으려 하는 자는 살고 요행히 살고자 하는 자는 죽을 것이다"</h3>
+    </div>
+</div>
+
+<div id="modal6" class="modal">
+    <div class="modal-content">
+        <h1 class="modal-title-left">이봉창(李奉昌)</h1>
+        <span class="close">&times;</span>
+        <p class="random-text text-hangul-modal5" data-description="김구는 대한민국 임시정부의 중요한 지도자로서 많은 독립운동가들을 이끌었으며, 이봉창 또한 그의 지도 하에 활동했습니다. 특히, 김구는 이봉창을 신뢰하고 일본 황제를 암살하려는 계획을 적극 지원했습니다.">김구</p>
+        <p class="random-text text-joseon-modal5" data-description="1932년 1월 8일, 이봉창은 일본 도쿄에서 열린 일본 천황의 신년 기마 행렬을 목표로 삼았습니다. 이봉창은 폭탄을 준비해 히비야 공원 앞에서 기다리고 있다가, 천황의 마차가 나타나자 폭탄을 던졌습니다. 하지만 폭탄은 마차에 정확히 명중하지 않고 경비병과 마차의 말에게 피해를 입혔습니다. 이봉창은 현장에서 체포되었습니다.">이봉창 의거</p>
+        <p class="random-text text-nongsajikseol-modal5" data-description="일부 자료에 따르면 그는 병약한 상태에서 독립운동을 했다고 전해집니다. 이봉창은 평소 건강이 좋지 않았고, 일본으로 건너가 노동자로 일하면서도 어려운 환경에서 생활했습니다. 그럼에도 불구하고 야구와 탁구 같은 운동들을 좋아했다고 하며 하다못해 거사 전에 골프까지 쳤다고 합니다.">병약</p>
+        <p class="random-text text-gogibanchan-modal5" data-description="한인애국단(韓人愛國團)은 1931년 김구의 주도하에 대한민국 임시정부가 결성한 항일무장투쟁 단체입니다. 바로 위에 있는 사진 속의 인물 이봉창과 윤봉길 의사의 의거(義擧)로 특히 유명합니다.">한인애국단</p>
+        <p class="random-text text-hunminjeongeum-modal5" data-description="이봉창 의사는 마미(麻尾)라는 수류탄을 사용했다고 하는데 무게가 가벼워 멀리 던질 수 있고 휴대가 간편하며 무엇보다도 가장 중요한 불발탄이 없다는 장점이 있었지만, 폭발력이 다소 약하다는 단점도 있었습니다. 백범 김구는 훗날 윤봉길 의사의 훙커우 공원 의거 직전에 이봉창 의사의 의거 실패를 기억하여 일단 위력이 제대로 나오는 폭탄을 부탁했는데, 그걸 받아간 윤봉길 의사는 폭탄 한 개로 무시무시한 전적을 올렸습니다.">마미(麻尾)</p>
+        <p id="modal-price"></p>
+        <p id="modal-description"></p>
+        <h3 class="modal-footer">"인생의 목적이 쾌락이라면 지난 31년동안 육신의 쾌락은 대강 맛보았습니다."<br>
+            "이제는 영원한 쾌락을 꿈꾸며 우리 독립 사업에 헌신할 목적으로 상하이에 왔습니다."</h3>
+    </div>
+</div>
+
+<div id="modal7" class="modal">
+    <div class="modal-content">
+        <h1 class="modal-title-left">안중근(安重根)</h1>
+        <span class="close">&times;</span>
+    
+        <p class="random-text text-hangul-modal5" data-description="안중근 의사의 유언은 그의 애국심과 희생정신, 그리고 독립에 대한 강한 염원을 담고 있습니다. 그의 유언은 많은 독립운동가들에게 영감을 주었으며, 오늘날까지도 한국인들에게 큰 감동을 주고 있습니다.">독립 열망</p>
+        <p class="random-text text-joseon-modal5" data-description="안중근의 하얼빈 의거는 1909년 10월 26일, 만주 하얼빈 역에서 일본 제국의 초대 한국 통감이자 일본의 총리였던 이토 히로부미를 암살한 사건입니다. 안중근은 하얼빈 역에서 이토 히로부미를 기다렸다가 그가 열차에서 내리는 순간, 권총으로 여러 발을 발사하여 이토 히로부미를 암살했습니다.">하얼빈 의거</p>
+        <p class="random-text text-nongsajikseol-modal5" data-description="동양평화론은 안중근 그가 동양의 평화와 협력을 위해 제안한 이상적인 계획을 담은 저서입니다. 안중근은 한국, 중국, 일본이 협력하여 동양의 평화를 유지하고 서양 열강의 침략을 막아야 한다고 주장했습니다.">동양평화론</p>
+        <p class="random-text text-gogibanchan-modal5" data-description="안중근의 손도장은 '단지장'(斷指章)이라고도 불리며, 이는 그가 손가락을 절단하고 만든 도장을 의미합니다. 안중근은 이토 히로부미를 암살하기 전, 독립운동에 대한 결의를 다지기 위해 동지들과 함께 손가락 한 마디를 잘라낸 후, 그 피로 서약서를 작성하고 손도장을 찍었습니다.">손도장</p>
+        <p class="random-text text-hunminjeongeum-modal5" data-description="안중근은 을사늑약(1905) 이후 일본의 침략에 맞서 싸우기 위해 의병에 가담했습니다. 그는 대한제국의 국권을 되찾기 위해 무장 투쟁을 벌였고, 이러한 활동을 통해 독립운동가로서의 입지를 다졌습니다.">의병 활동</p>
+        <p id="modal-price"></p>
+        <p id="modal-description"></p>
+        <h3 class="modal-footer">"나는 척국에 가서도 마땅히 조국의 독립을 위해 힘쓸 것이오."<br>
+        "대한 독립의 함성이 천국까지 들려오면 나는 기꺼이 춤을 추면서 만세를 부를 것이오."</h3> 
+    </div>
+</div>
+
+
+<div id="modal8" class="modal">
+    <div class="modal-content">
+        <h1 class="modal-title-left">유관순(柳寬順)</h1>
+        <span class="close">&times;</span>
+    
+        <p class="random-text text-hangul-modal5" data-description="유관순은 3·1 운동에 적극 참여했으며, 특히 1919년 4월 1일 충청남도 천안 아우내 장터에서 만세운동을 주도했습니다. 이 운동은 지역 주민들과 함께 일어난 대규모 시위로, 일본 경찰과 충돌하여 많은 희생자가 발생했습니다.">3.1운동</p>
+        <p class="random-text text-joseon-modal5" data-description="서대문 형무소는 1908년 일제강점기에 조선인들의 독립운동을 탄압하기 위해 일본에 의해 설립되었습니다. 유관순은 아우내 장터 만세운동 이후 체포되어 일본 경찰의 잔혹한 고문을 받았으며, 1920년 서대문형무소에서 고문 후유증으로 사망했습니다.">서대문 형무소</p>
+        <p class="random-text text-nongsajikseol-modal5" data-description="집안 전체가 개신교 집안이라 유관순도 자연스럽게 어린 시절부터 개신교 신앙을 접하고 믿게 되었습니다. 천안에서 살 때는 온 가족이 매봉교회에 출석했고 이화학당에 입학한 이후에는 정동교회에 나갔습니다. 사실 정동교회가 이화학당에서 가장 가까운 교회라 이화학당의 학생들과 선교사들은 주일이 되면 이 교회를 나갔습니다.">개신교</p>
+        <p class="random-text text-gogibanchan-modal5" data-description="유관순은 1916년 이화학당에 입학하여 교육을 받았습니다. 이화학당에서의 교육은 유관순에게 큰 영향을 미쳤으며, 독립운동에 대한 열망을 키우는 계기가 되었습니다.">이화학당</p>
+        <p class="random-text text-hunminjeongeum-modal5" data-description="1919년 3월 1일, 3·1 운동이 일어날 때 유관순은 만 16세였습니다. 당시 한국 나이로는 18세에 해당합니다.">16세</p>
+        <p id="modal-price"></p>
+        <p id="modal-description"></p>
+        <h3 class="modal-footer">"내 손톱이 빠져 나가고, 내 귀와 코가 잘리고, 내 손과 다리가 부러져도 그 고통은 <br>이길 수 있사오나, 나라를 잃어버린 그 고통만은 견딜 수가 없습니다."</h3>
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="row">
+        <ul>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </div>
+    <div class="row">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+    </div>
+    <div class="row">
+        &copy; 2024 Museum of Culture. All rights reserved.
+    </div>
+</footer>
+
+<!-- 오버레이 -->
+<div class="hover-overlay" id="hover-overlay"></div>
+
+<script>
+    const scrollWrapper = document.getElementById('scrolling-wrapper');
+    const scrollButtons = document.querySelectorAll('.scroll-button');
+    const modals = document.querySelectorAll('.modal');
+    const closeBtns = document.querySelectorAll('.close');
+    const overlay = document.getElementById('hover-overlay');
+
+    // 초기 스크롤 위치를 가운데로 설정
+    window.addEventListener('load', () => {
+        const middlePosition = (scrollWrapper.scrollWidth - scrollWrapper.clientWidth) / 2;
+        scrollWrapper.scrollLeft = middlePosition;
+    });
+
+    scrollButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const cardWidth = 310; // 카드 너비와 여백을 포함한 값
+            if (button.classList.contains('left')) {
+                scrollWrapper.scrollBy({ left: -cardWidth, behavior: 'smooth' });
+            } else {
+                scrollWrapper.scrollBy({ left: cardWidth, behavior: 'smooth' });
+            }
+        });
+    });
+
+    function openModal(modalId) {
+        const modal = document.getElementById(modalId);
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden'; // 모달 창이 열릴 때 가로 스크롤 비활성화
+    }
+
+    closeBtns.forEach(btn => {
+        btn.onclick = function() {
+            modals.forEach(modal => modal.style.display = 'none');
+            document.body.style.overflow = 'auto'; // 모달 창이 닫힐 때 가로 스크롤 활성화
+        };
+    });
+
+    window.onclick = function(event) {
+        if (event.target.classList.contains('modal')) {
+            modals.forEach(modal => modal.style.display = 'none');
+            document.body.style.overflow = 'auto'; // 모달 창이 닫힐 때 가로 스크롤 활성화
+        }
+    }
+
+    // 오버레이 텍스트를 설정하는 함수
+    function showOverlay(text) {
+        overlay.textContent = text;
+        overlay.style.opacity = 1;
+        overlay.style.visibility = 'visible';
+    }
+
+    // 오버레이를 숨기는 함수
+    function hideOverlay() {
+        overlay.style.opacity = 0;
+        overlay.style.visibility = 'hidden';
+    }
+
+    // 각 random-text 요소에 클릭 이벤트 리스너 추가
+    const randomTexts = document.querySelectorAll('.random-text');
+    randomTexts.forEach(text => {
+        text.addEventListener('click', () => showOverlay(text.getAttribute('data-description')));
+    });
+
+    // 오버레이를 클릭하면 숨기도록 이벤트 리스너 추가
+    overlay.addEventListener('click', hideOverlay);
+</script>
+
+</body>
+</html>
